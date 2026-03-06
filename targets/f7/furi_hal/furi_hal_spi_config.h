@@ -21,6 +21,9 @@ extern const LL_SPI_InitTypeDef furi_hal_spi_preset_1edge_low_16m;
 /** Preset for SdCard in slow mode */
 extern const LL_SPI_InitTypeDef furi_hal_spi_preset_1edge_low_2m;
 
+/** Preset for Button Shift Register (74HC165) */
+extern const LL_SPI_InitTypeDef furi_hal_spi_preset_1edge_low_BTN;
+
 /** Furi Hal Spi Bus R (Radio: CC1101, Nfc, External)*/
 extern FuriHalSpiBus furi_hal_spi_bus_r;
 
@@ -55,6 +58,9 @@ extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_sd_fast;
 
 /** SdCard in slow mode on `furi_hal_spi_bus_d` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_sd_slow;
+
+/** Button Shift Register on `furi_hal_spi_bus_r` */
+extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_button_sr;
 
 #ifdef __cplusplus
 }

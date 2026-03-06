@@ -6,7 +6,7 @@ _stack_end = 0x20030000;    /* end of RAM */
 _stack_size = 0x400; /* required amount of stack */
 
 MEMORY {
-    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 1024K
+    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 1024K  /* WeAct: BLE stack starts at 0x080D7000 */
     RAM1  (xrw) : ORIGIN = 0x20000008, LENGTH = 0x2FFF8
     RAM2A (xrw) : ORIGIN = 0x20030000, LENGTH = 10K
     RAM2B (xrw) : ORIGIN = 0x20038000, LENGTH = 10K

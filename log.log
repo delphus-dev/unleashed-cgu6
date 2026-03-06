@@ -1,0 +1,570 @@
+01:44:39 : STM32CubeProgrammer API v2.19.0 | Windows-64Bits 
+01:44:45 : UR connection mode is defined with the HWrst reset mode
+01:44:45 : USB speed   : Full Speed (12MBit/s)
+01:44:45 : Manuf. ID   : STMicroelectronics
+01:44:45 : Product ID  : DFU in FS Mode
+01:44:45 : SN          : 2058357D5848
+01:44:45 : DFU protocol: 1.1
+01:44:45 : Board       : --
+01:44:45 : Device ID   : 0x0495
+01:44:45 : UPLOADING OPTION BYTES DATA ...
+01:44:45 :   Bank          : 0x00
+01:44:45 :   Address       : 0x1fff8000
+01:44:45 :   Size          : 128 Bytes
+01:44:45 : UPLOADING ...
+01:44:45 :   Size          : 4 Bytes
+01:44:45 :   Address       : 0x1FFF8070
+01:44:45 : Read progress:
+01:44:45 : Data read successfully
+01:44:45 : Time elapsed during the read operation is: 00:00:00.002
+01:44:45 : UPLOADING ...
+01:44:45 :   Size          : 1024 Bytes
+01:44:45 :   Address       : 0x8000000
+01:44:45 : Read progress:
+01:44:45 : Data read successfully
+01:44:45 : Time elapsed during the read operation is: 00:00:00.003
+01:44:50:951 : UPLOADING ...
+01:44:50:951 :   Size          : 4 Bytes
+01:44:50:951 :   Address       : 0x1FFF8070
+01:44:50:951 : Read progress:
+01:44:50:951 : sending an abort request
+01:44:50:953 : setting the address pointer to address: 0x1fff8070
+01:44:50:953 : receiving packet nbr: 0
+01:44:50:953 : sending an abort request
+01:44:50:953 : UpLoading data
+01:44:50:953 : Data read successfully
+01:44:50:953 : Time elapsed during the read operation is: 00:00:00.002
+01:44:50:962 : UPLOADING ...
+01:44:50:962 :   Size          : 1024 Bytes
+01:44:50:962 :   Address       : 0x8000000
+01:44:50:962 : Read progress:
+01:44:50:962 : sending an abort request
+01:44:50:962 : setting the address pointer to address: 0x08000000
+01:44:50:963 : receiving packet nbr: 0
+01:44:50:964 : sending an abort request
+01:44:50:964 : UpLoading data
+01:44:50:968 : Data read successfully
+01:44:50:968 : Time elapsed during the read operation is: 00:00:00.003
+01:44:59:928 : sending an abort request
+01:44:59:928 : setting the address pointer to address: 0x08000000
+01:44:59:930 : Opening and parsing file: firmware.elf
+01:44:59:930 : Memory Programming ...
+01:44:59:930 :   File          : firmware.elf
+01:44:59:940 :   Size          : 871.09 KB 
+01:44:59:941 :   Address       : 0x08000000 
+01:44:59:942 : Erasing memory corresponding to sector 0:
+01:44:59:944 : Erasing internal memory sectors [0 217]
+01:44:59:991 : sending an abort request
+01:44:59:992 : sending a page erase request @: 0x08000000
+01:45:00:008 : erasing sector 0000 @: 0x08000000 done
+01:45:00:008 : sending a page erase request @: 0x08001000
+01:45:00:039 : erasing sector 0001 @: 0x08001000 done
+01:45:00:040 : sending a page erase request @: 0x08002000
+01:45:00:057 : erasing sector 0002 @: 0x08002000 done
+01:45:00:057 : sending a page erase request @: 0x08003000
+01:45:00:090 : erasing sector 0003 @: 0x08003000 done
+01:45:00:090 : sending a page erase request @: 0x08004000
+01:45:00:106 : erasing sector 0004 @: 0x08004000 done
+01:45:00:107 : sending a page erase request @: 0x08005000
+01:45:00:139 : erasing sector 0005 @: 0x08005000 done
+01:45:00:141 : sending a page erase request @: 0x08006000
+01:45:00:147 : erasing sector 0006 @: 0x08006000 done
+01:45:00:148 : sending a page erase request @: 0x08007000
+01:45:00:169 : erasing sector 0007 @: 0x08007000 done
+01:45:00:170 : sending a page erase request @: 0x08008000
+01:45:00:193 : erasing sector 0008 @: 0x08008000 done
+01:45:00:194 : sending a page erase request @: 0x08009000
+01:45:00:216 : erasing sector 0009 @: 0x08009000 done
+01:45:00:217 : sending a page erase request @: 0x0800a000
+01:45:00:239 : erasing sector 0010 @: 0x0800a000 done
+01:45:00:240 : sending a page erase request @: 0x0800b000
+01:45:00:262 : erasing sector 0011 @: 0x0800b000 done
+01:45:00:263 : sending a page erase request @: 0x0800c000
+01:45:00:289 : erasing sector 0012 @: 0x0800c000 done
+01:45:00:290 : sending a page erase request @: 0x0800d000
+01:45:00:308 : erasing sector 0013 @: 0x0800d000 done
+01:45:00:309 : sending a page erase request @: 0x0800e000
+01:45:00:339 : erasing sector 0014 @: 0x0800e000 done
+01:45:00:340 : sending a page erase request @: 0x0800f000
+01:45:00:356 : erasing sector 0015 @: 0x0800f000 done
+01:45:00:357 : sending a page erase request @: 0x08010000
+01:45:00:378 : erasing sector 0016 @: 0x08010000 done
+01:45:00:379 : sending a page erase request @: 0x08011000
+01:45:00:406 : erasing sector 0017 @: 0x08011000 done
+01:45:00:407 : sending a page erase request @: 0x08012000
+01:45:00:425 : erasing sector 0018 @: 0x08012000 done
+01:45:00:425 : sending a page erase request @: 0x08013000
+01:45:00:456 : erasing sector 0019 @: 0x08013000 done
+01:45:00:456 : sending a page erase request @: 0x08014000
+01:45:00:472 : erasing sector 0020 @: 0x08014000 done
+01:45:00:472 : sending a page erase request @: 0x08015000
+01:45:00:506 : erasing sector 0021 @: 0x08015000 done
+01:45:00:506 : sending a page erase request @: 0x08016000
+01:45:00:523 : erasing sector 0022 @: 0x08016000 done
+01:45:00:523 : sending a page erase request @: 0x08017000
+01:45:00:540 : erasing sector 0023 @: 0x08017000 done
+01:45:00:541 : sending a page erase request @: 0x08018000
+01:45:00:563 : erasing sector 0024 @: 0x08018000 done
+01:45:00:564 : sending a page erase request @: 0x08019000
+01:45:00:586 : erasing sector 0025 @: 0x08019000 done
+01:45:00:587 : sending a page erase request @: 0x0801a000
+01:45:00:609 : erasing sector 0026 @: 0x0801a000 done
+01:45:00:609 : sending a page erase request @: 0x0801b000
+01:45:00:633 : erasing sector 0027 @: 0x0801b000 done
+01:45:00:633 : sending a page erase request @: 0x0801c000
+01:45:00:656 : erasing sector 0028 @: 0x0801c000 done
+01:45:00:657 : sending a page erase request @: 0x0801d000
+01:45:00:678 : erasing sector 0029 @: 0x0801d000 done
+01:45:00:679 : sending a page erase request @: 0x0801e000
+01:45:00:706 : erasing sector 0030 @: 0x0801e000 done
+01:45:00:706 : sending a page erase request @: 0x0801f000
+01:45:00:724 : erasing sector 0031 @: 0x0801f000 done
+01:45:00:725 : sending a page erase request @: 0x08020000
+01:45:00:747 : erasing sector 0032 @: 0x08020000 done
+01:45:00:748 : sending a page erase request @: 0x08021000
+01:45:00:774 : erasing sector 0033 @: 0x08021000 done
+01:45:00:774 : sending a page erase request @: 0x08022000
+01:45:00:794 : erasing sector 0034 @: 0x08022000 done
+01:45:00:795 : sending a page erase request @: 0x08023000
+01:45:00:822 : erasing sector 0035 @: 0x08023000 done
+01:45:00:824 : sending a page erase request @: 0x08024000
+01:45:00:840 : erasing sector 0036 @: 0x08024000 done
+01:45:00:840 : sending a page erase request @: 0x08025000
+01:45:00:872 : erasing sector 0037 @: 0x08025000 done
+01:45:00:874 : sending a page erase request @: 0x08026000
+01:45:00:889 : erasing sector 0038 @: 0x08026000 done
+01:45:00:889 : sending a page erase request @: 0x08027000
+01:45:00:923 : erasing sector 0039 @: 0x08027000 done
+01:45:00:923 : sending a page erase request @: 0x08028000
+01:45:00:943 : erasing sector 0040 @: 0x08028000 done
+01:45:00:943 : sending a page erase request @: 0x08029000
+01:45:00:959 : erasing sector 0041 @: 0x08029000 done
+01:45:00:959 : sending a page erase request @: 0x0802a000
+01:45:00:979 : erasing sector 0042 @: 0x0802a000 done
+01:45:00:979 : sending a page erase request @: 0x0802b000
+01:45:01:001 : erasing sector 0043 @: 0x0802b000 done
+01:45:01:001 : sending a page erase request @: 0x0802c000
+01:45:01:024 : erasing sector 0044 @: 0x0802c000 done
+01:45:01:024 : sending a page erase request @: 0x0802d000
+01:45:01:046 : erasing sector 0045 @: 0x0802d000 done
+01:45:01:048 : sending a page erase request @: 0x0802e000
+01:45:01:074 : erasing sector 0046 @: 0x0802e000 done
+01:45:01:074 : sending a page erase request @: 0x0802f000
+01:45:01:093 : erasing sector 0047 @: 0x0802f000 done
+01:45:01:094 : sending a page erase request @: 0x08030000
+01:45:01:123 : erasing sector 0048 @: 0x08030000 done
+01:45:01:123 : sending a page erase request @: 0x08031000
+01:45:01:140 : erasing sector 0049 @: 0x08031000 done
+01:45:01:140 : sending a page erase request @: 0x08032000
+01:45:01:162 : erasing sector 0050 @: 0x08032000 done
+01:45:01:163 : sending a page erase request @: 0x08033000
+01:45:01:194 : erasing sector 0051 @: 0x08033000 done
+01:45:01:195 : sending a page erase request @: 0x08034000
+01:45:01:209 : erasing sector 0052 @: 0x08034000 done
+01:45:01:209 : sending a page erase request @: 0x08035000
+01:45:01:240 : erasing sector 0053 @: 0x08035000 done
+01:45:01:241 : sending a page erase request @: 0x08036000
+01:45:01:256 : erasing sector 0054 @: 0x08036000 done
+01:45:01:257 : sending a page erase request @: 0x08037000
+01:45:01:290 : erasing sector 0055 @: 0x08037000 done
+01:45:01:290 : sending a page erase request @: 0x08038000
+01:45:01:306 : erasing sector 0056 @: 0x08038000 done
+01:45:01:307 : sending a page erase request @: 0x08039000
+01:45:01:339 : erasing sector 0057 @: 0x08039000 done
+01:45:01:340 : sending a page erase request @: 0x0803a000
+01:45:01:358 : erasing sector 0058 @: 0x0803a000 done
+01:45:01:358 : sending a page erase request @: 0x0803b000
+01:45:01:370 : erasing sector 0059 @: 0x0803b000 done
+01:45:01:370 : sending a page erase request @: 0x0803c000
+01:45:01:394 : erasing sector 0060 @: 0x0803c000 done
+01:45:01:394 : sending a page erase request @: 0x0803d000
+01:45:01:416 : erasing sector 0061 @: 0x0803d000 done
+01:45:01:417 : sending a page erase request @: 0x0803e000
+01:45:01:440 : erasing sector 0062 @: 0x0803e000 done
+01:45:01:441 : sending a page erase request @: 0x0803f000
+01:45:01:463 : erasing sector 0063 @: 0x0803f000 done
+01:45:01:464 : sending a page erase request @: 0x08040000
+01:45:01:489 : erasing sector 0064 @: 0x08040000 done
+01:45:01:490 : sending a page erase request @: 0x08041000
+01:45:01:510 : erasing sector 0065 @: 0x08041000 done
+01:45:01:510 : sending a page erase request @: 0x08042000
+01:45:01:540 : erasing sector 0066 @: 0x08042000 done
+01:45:01:540 : sending a page erase request @: 0x08043000
+01:45:01:556 : erasing sector 0067 @: 0x08043000 done
+01:45:01:557 : sending a page erase request @: 0x08044000
+01:45:01:589 : erasing sector 0068 @: 0x08044000 done
+01:45:01:590 : sending a page erase request @: 0x08045000
+01:45:01:608 : erasing sector 0069 @: 0x08045000 done
+01:45:01:608 : sending a page erase request @: 0x08046000
+01:45:01:626 : erasing sector 0070 @: 0x08046000 done
+01:45:01:626 : sending a page erase request @: 0x08047000
+01:45:01:657 : erasing sector 0071 @: 0x08047000 done
+01:45:01:657 : sending a page erase request @: 0x08048000
+01:45:01:673 : erasing sector 0072 @: 0x08048000 done
+01:45:01:673 : sending a page erase request @: 0x08049000
+01:45:01:708 : erasing sector 0073 @: 0x08049000 done
+01:45:01:708 : sending a page erase request @: 0x0804a000
+01:45:01:725 : erasing sector 0074 @: 0x0804a000 done
+01:45:01:726 : sending a page erase request @: 0x0804b000
+01:45:01:756 : erasing sector 0075 @: 0x0804b000 done
+01:45:01:757 : sending a page erase request @: 0x0804c000
+01:45:01:764 : erasing sector 0076 @: 0x0804c000 done
+01:45:01:765 : sending a page erase request @: 0x0804d000
+01:45:01:787 : erasing sector 0077 @: 0x0804d000 done
+01:45:01:788 : sending a page erase request @: 0x0804e000
+01:45:01:811 : erasing sector 0078 @: 0x0804e000 done
+01:45:01:812 : sending a page erase request @: 0x0804f000
+01:45:01:834 : erasing sector 0079 @: 0x0804f000 done
+01:45:01:835 : sending a page erase request @: 0x08050000
+01:45:01:857 : erasing sector 0080 @: 0x08050000 done
+01:45:01:857 : sending a page erase request @: 0x08051000
+01:45:01:880 : erasing sector 0081 @: 0x08051000 done
+01:45:01:880 : sending a page erase request @: 0x08052000
+01:45:01:906 : erasing sector 0082 @: 0x08052000 done
+01:45:01:907 : sending a page erase request @: 0x08053000
+01:45:01:926 : erasing sector 0083 @: 0x08053000 done
+01:45:01:927 : sending a page erase request @: 0x08054000
+01:45:01:956 : erasing sector 0084 @: 0x08054000 done
+01:45:01:957 : sending a page erase request @: 0x08055000
+01:45:01:973 : erasing sector 0085 @: 0x08055000 done
+01:45:01:973 : sending a page erase request @: 0x08056000
+01:45:02:005 : erasing sector 0086 @: 0x08056000 done
+01:45:02:006 : sending a page erase request @: 0x08057000
+01:45:02:023 : erasing sector 0087 @: 0x08057000 done
+01:45:02:024 : sending a page erase request @: 0x08058000
+01:45:02:042 : erasing sector 0088 @: 0x08058000 done
+01:45:02:044 : sending a page erase request @: 0x08059000
+01:45:02:074 : erasing sector 0089 @: 0x08059000 done
+01:45:02:074 : sending a page erase request @: 0x0805a000
+01:45:02:091 : erasing sector 0090 @: 0x0805a000 done
+01:45:02:091 : sending a page erase request @: 0x0805b000
+01:45:02:124 : erasing sector 0091 @: 0x0805b000 done
+01:45:02:124 : sending a page erase request @: 0x0805c000
+01:45:02:142 : erasing sector 0092 @: 0x0805c000 done
+01:45:02:142 : sending a page erase request @: 0x0805d000
+01:45:02:158 : erasing sector 0093 @: 0x0805d000 done
+01:45:02:158 : sending a page erase request @: 0x0805e000
+01:45:02:180 : erasing sector 0094 @: 0x0805e000 done
+01:45:02:181 : sending a page erase request @: 0x0805f000
+01:45:02:203 : erasing sector 0095 @: 0x0805f000 done
+01:45:02:205 : sending a page erase request @: 0x08060000
+01:45:02:227 : erasing sector 0096 @: 0x08060000 done
+01:45:02:228 : sending a page erase request @: 0x08061000
+01:45:02:250 : erasing sector 0097 @: 0x08061000 done
+01:45:02:250 : sending a page erase request @: 0x08062000
+01:45:02:273 : erasing sector 0098 @: 0x08062000 done
+01:45:02:274 : sending a page erase request @: 0x08063000
+01:45:02:296 : erasing sector 0099 @: 0x08063000 done
+01:45:02:297 : sending a page erase request @: 0x08064000
+01:45:02:322 : erasing sector 0100 @: 0x08064000 done
+01:45:02:324 : sending a page erase request @: 0x08065000
+01:45:02:342 : erasing sector 0101 @: 0x08065000 done
+01:45:02:342 : sending a page erase request @: 0x08066000
+01:45:02:373 : erasing sector 0102 @: 0x08066000 done
+01:45:02:374 : sending a page erase request @: 0x08067000
+01:45:02:390 : erasing sector 0103 @: 0x08067000 done
+01:45:02:390 : sending a page erase request @: 0x08068000
+01:45:02:423 : erasing sector 0104 @: 0x08068000 done
+01:45:02:424 : sending a page erase request @: 0x08069000
+01:45:02:439 : erasing sector 0105 @: 0x08069000 done
+01:45:02:440 : sending a page erase request @: 0x0806a000
+01:45:02:457 : erasing sector 0106 @: 0x0806a000 done
+01:45:02:459 : sending a page erase request @: 0x0806b000
+01:45:02:489 : erasing sector 0107 @: 0x0806b000 done
+01:45:02:490 : sending a page erase request @: 0x0806c000
+01:45:02:506 : erasing sector 0108 @: 0x0806c000 done
+01:45:02:507 : sending a page erase request @: 0x0806d000
+01:45:02:539 : erasing sector 0109 @: 0x0806d000 done
+01:45:02:541 : sending a page erase request @: 0x0806e000
+01:45:02:559 : erasing sector 0110 @: 0x0806e000 done
+01:45:02:559 : sending a page erase request @: 0x0806f000
+01:45:02:574 : erasing sector 0111 @: 0x0806f000 done
+01:45:02:575 : sending a page erase request @: 0x08070000
+01:45:02:597 : erasing sector 0112 @: 0x08070000 done
+01:45:02:598 : sending a page erase request @: 0x08071000
+01:45:02:623 : erasing sector 0113 @: 0x08071000 done
+01:45:02:624 : sending a page erase request @: 0x08072000
+01:45:02:643 : erasing sector 0114 @: 0x08072000 done
+01:45:02:644 : sending a page erase request @: 0x08073000
+01:45:02:666 : erasing sector 0115 @: 0x08073000 done
+01:45:02:666 : sending a page erase request @: 0x08074000
+01:45:02:689 : erasing sector 0116 @: 0x08074000 done
+01:45:02:690 : sending a page erase request @: 0x08075000
+01:45:02:712 : erasing sector 0117 @: 0x08075000 done
+01:45:02:712 : sending a page erase request @: 0x08076000
+01:45:02:739 : erasing sector 0118 @: 0x08076000 done
+01:45:02:741 : sending a page erase request @: 0x08077000
+01:45:02:758 : erasing sector 0119 @: 0x08077000 done
+01:45:02:759 : sending a page erase request @: 0x08078000
+01:45:02:789 : erasing sector 0120 @: 0x08078000 done
+01:45:02:790 : sending a page erase request @: 0x08079000
+01:45:02:807 : erasing sector 0121 @: 0x08079000 done
+01:45:02:807 : sending a page erase request @: 0x0807a000
+01:45:02:840 : erasing sector 0122 @: 0x0807a000 done
+01:45:02:840 : sending a page erase request @: 0x0807b000
+01:45:02:856 : erasing sector 0123 @: 0x0807b000 done
+01:45:02:856 : sending a page erase request @: 0x0807c000
+01:45:02:874 : erasing sector 0124 @: 0x0807c000 done
+01:45:02:875 : sending a page erase request @: 0x0807d000
+01:45:02:906 : erasing sector 0125 @: 0x0807d000 done
+01:45:02:906 : sending a page erase request @: 0x0807e000
+01:45:02:922 : erasing sector 0126 @: 0x0807e000 done
+01:45:02:924 : sending a page erase request @: 0x0807f000
+01:45:02:943 : erasing sector 0127 @: 0x0807f000 done
+01:45:02:943 : sending a page erase request @: 0x08080000
+01:45:02:966 : erasing sector 0128 @: 0x08080000 done
+01:45:02:967 : sending a page erase request @: 0x08081000
+01:45:02:989 : erasing sector 0129 @: 0x08081000 done
+01:45:02:990 : sending a page erase request @: 0x08082000
+01:45:03:013 : erasing sector 0130 @: 0x08082000 done
+01:45:03:014 : sending a page erase request @: 0x08083000
+01:45:03:040 : erasing sector 0131 @: 0x08083000 done
+01:45:03:041 : sending a page erase request @: 0x08084000
+01:45:03:059 : erasing sector 0132 @: 0x08084000 done
+01:45:03:059 : sending a page erase request @: 0x08085000
+01:45:03:082 : erasing sector 0133 @: 0x08085000 done
+01:45:03:083 : sending a page erase request @: 0x08086000
+01:45:03:106 : erasing sector 0134 @: 0x08086000 done
+01:45:03:107 : sending a page erase request @: 0x08087000
+01:45:03:128 : erasing sector 0135 @: 0x08087000 done
+01:45:03:129 : sending a page erase request @: 0x08088000
+01:45:03:156 : erasing sector 0136 @: 0x08088000 done
+01:45:03:156 : sending a page erase request @: 0x08089000
+01:45:03:174 : erasing sector 0137 @: 0x08089000 done
+01:45:03:176 : sending a page erase request @: 0x0808a000
+01:45:03:206 : erasing sector 0138 @: 0x0808a000 done
+01:45:03:207 : sending a page erase request @: 0x0808b000
+01:45:03:222 : erasing sector 0139 @: 0x0808b000 done
+01:45:03:224 : sending a page erase request @: 0x0808c000
+01:45:03:243 : erasing sector 0140 @: 0x0808c000 done
+01:45:03:244 : sending a page erase request @: 0x0808d000
+01:45:03:273 : erasing sector 0141 @: 0x0808d000 done
+01:45:03:273 : sending a page erase request @: 0x0808e000
+01:45:03:290 : erasing sector 0142 @: 0x0808e000 done
+01:45:03:293 : sending a page erase request @: 0x0808f000
+01:45:03:322 : erasing sector 0143 @: 0x0808f000 done
+01:45:03:324 : sending a page erase request @: 0x08090000
+01:45:03:341 : erasing sector 0144 @: 0x08090000 done
+01:45:03:343 : sending a page erase request @: 0x08091000
+01:45:03:359 : erasing sector 0145 @: 0x08091000 done
+01:45:03:359 : sending a page erase request @: 0x08092000
+01:45:03:382 : erasing sector 0146 @: 0x08092000 done
+01:45:03:383 : sending a page erase request @: 0x08093000
+01:45:03:407 : erasing sector 0147 @: 0x08093000 done
+01:45:03:407 : sending a page erase request @: 0x08094000
+01:45:03:429 : erasing sector 0148 @: 0x08094000 done
+01:45:03:430 : sending a page erase request @: 0x08095000
+01:45:03:452 : erasing sector 0149 @: 0x08095000 done
+01:45:03:456 : sending a page erase request @: 0x08096000
+01:45:03:475 : erasing sector 0150 @: 0x08096000 done
+01:45:03:476 : sending a page erase request @: 0x08097000
+01:45:03:498 : erasing sector 0151 @: 0x08097000 done
+01:45:03:498 : sending a page erase request @: 0x08098000
+01:45:03:523 : erasing sector 0152 @: 0x08098000 done
+01:45:03:523 : sending a page erase request @: 0x08099000
+01:45:03:544 : erasing sector 0153 @: 0x08099000 done
+01:45:03:545 : sending a page erase request @: 0x0809a000
+01:45:03:573 : erasing sector 0154 @: 0x0809a000 done
+01:45:03:573 : sending a page erase request @: 0x0809b000
+01:45:03:590 : erasing sector 0155 @: 0x0809b000 done
+01:45:03:591 : sending a page erase request @: 0x0809c000
+01:45:03:623 : erasing sector 0156 @: 0x0809c000 done
+01:45:03:623 : sending a page erase request @: 0x0809d000
+01:45:03:639 : erasing sector 0157 @: 0x0809d000 done
+01:45:03:640 : sending a page erase request @: 0x0809e000
+01:45:03:672 : erasing sector 0158 @: 0x0809e000 done
+01:45:03:672 : sending a page erase request @: 0x0809f000
+01:45:03:689 : erasing sector 0159 @: 0x0809f000 done
+01:45:03:690 : sending a page erase request @: 0x080a0000
+01:45:03:706 : erasing sector 0160 @: 0x080a0000 done
+01:45:03:707 : sending a page erase request @: 0x080a1000
+01:45:03:740 : erasing sector 0161 @: 0x080a1000 done
+01:45:03:741 : sending a page erase request @: 0x080a2000
+01:45:03:752 : erasing sector 0162 @: 0x080a2000 done
+01:45:03:753 : sending a page erase request @: 0x080a3000
+01:45:03:776 : erasing sector 0163 @: 0x080a3000 done
+01:45:03:778 : sending a page erase request @: 0x080a4000
+01:45:03:799 : erasing sector 0164 @: 0x080a4000 done
+01:45:03:799 : sending a page erase request @: 0x080a5000
+01:45:03:824 : erasing sector 0165 @: 0x080a5000 done
+01:45:03:824 : sending a page erase request @: 0x080a6000
+01:45:03:846 : erasing sector 0166 @: 0x080a6000 done
+01:45:03:846 : sending a page erase request @: 0x080a7000
+01:45:03:873 : erasing sector 0167 @: 0x080a7000 done
+01:45:03:873 : sending a page erase request @: 0x080a8000
+01:45:03:891 : erasing sector 0168 @: 0x080a8000 done
+01:45:03:891 : sending a page erase request @: 0x080a9000
+01:45:03:915 : erasing sector 0169 @: 0x080a9000 done
+01:45:03:918 : sending a page erase request @: 0x080aa000
+01:45:03:940 : erasing sector 0170 @: 0x080aa000 done
+01:45:03:940 : sending a page erase request @: 0x080ab000
+01:45:03:960 : erasing sector 0171 @: 0x080ab000 done
+01:45:03:963 : sending a page erase request @: 0x080ac000
+01:45:03:989 : erasing sector 0172 @: 0x080ac000 done
+01:45:03:990 : sending a page erase request @: 0x080ad000
+01:45:04:006 : erasing sector 0173 @: 0x080ad000 done
+01:45:04:009 : sending a page erase request @: 0x080ae000
+01:45:04:039 : erasing sector 0174 @: 0x080ae000 done
+01:45:04:040 : sending a page erase request @: 0x080af000
+01:45:04:057 : erasing sector 0175 @: 0x080af000 done
+01:45:04:057 : sending a page erase request @: 0x080b0000
+01:45:04:089 : erasing sector 0176 @: 0x080b0000 done
+01:45:04:090 : sending a page erase request @: 0x080b1000
+01:45:04:107 : erasing sector 0177 @: 0x080b1000 done
+01:45:04:108 : sending a page erase request @: 0x080b2000
+01:45:04:128 : erasing sector 0178 @: 0x080b2000 done
+01:45:04:128 : sending a page erase request @: 0x080b3000
+01:45:04:145 : erasing sector 0179 @: 0x080b3000 done
+01:45:04:147 : sending a page erase request @: 0x080b4000
+01:45:04:168 : erasing sector 0180 @: 0x080b4000 done
+01:45:04:168 : sending a page erase request @: 0x080b5000
+01:45:04:192 : erasing sector 0181 @: 0x080b5000 done
+01:45:04:194 : sending a page erase request @: 0x080b6000
+01:45:04:215 : erasing sector 0182 @: 0x080b6000 done
+01:45:04:216 : sending a page erase request @: 0x080b7000
+01:45:04:239 : erasing sector 0183 @: 0x080b7000 done
+01:45:04:240 : sending a page erase request @: 0x080b8000
+01:45:04:261 : erasing sector 0184 @: 0x080b8000 done
+01:45:04:263 : sending a page erase request @: 0x080b9000
+01:45:04:290 : erasing sector 0185 @: 0x080b9000 done
+01:45:04:291 : sending a page erase request @: 0x080ba000
+01:45:04:307 : erasing sector 0186 @: 0x080ba000 done
+01:45:04:310 : sending a page erase request @: 0x080bb000
+01:45:04:330 : erasing sector 0187 @: 0x080bb000 done
+01:45:04:330 : sending a page erase request @: 0x080bc000
+01:45:04:356 : erasing sector 0188 @: 0x080bc000 done
+01:45:04:357 : sending a page erase request @: 0x080bd000
+01:45:04:377 : erasing sector 0189 @: 0x080bd000 done
+01:45:04:377 : sending a page erase request @: 0x080be000
+01:45:04:406 : erasing sector 0190 @: 0x080be000 done
+01:45:04:406 : sending a page erase request @: 0x080bf000
+01:45:04:424 : erasing sector 0191 @: 0x080bf000 done
+01:45:04:424 : sending a page erase request @: 0x080c0000
+01:45:04:456 : erasing sector 0192 @: 0x080c0000 done
+01:45:04:456 : sending a page erase request @: 0x080c1000
+01:45:04:473 : erasing sector 0193 @: 0x080c1000 done
+01:45:04:474 : sending a page erase request @: 0x080c2000
+01:45:04:506 : erasing sector 0194 @: 0x080c2000 done
+01:45:04:507 : sending a page erase request @: 0x080c3000
+01:45:04:526 : erasing sector 0195 @: 0x080c3000 done
+01:45:04:527 : sending a page erase request @: 0x080c4000
+01:45:04:546 : erasing sector 0196 @: 0x080c4000 done
+01:45:04:547 : sending a page erase request @: 0x080c5000
+01:45:04:564 : erasing sector 0197 @: 0x080c5000 done
+01:45:04:564 : sending a page erase request @: 0x080c6000
+01:45:04:585 : erasing sector 0198 @: 0x080c6000 done
+01:45:04:586 : sending a page erase request @: 0x080c7000
+01:45:04:609 : erasing sector 0199 @: 0x080c7000 done
+01:45:04:609 : sending a page erase request @: 0x080c8000
+01:45:04:632 : erasing sector 0200 @: 0x080c8000 done
+01:45:04:632 : sending a page erase request @: 0x080c9000
+01:45:04:657 : erasing sector 0201 @: 0x080c9000 done
+01:45:04:658 : sending a page erase request @: 0x080ca000
+01:45:04:678 : erasing sector 0202 @: 0x080ca000 done
+01:45:04:678 : sending a page erase request @: 0x080cb000
+01:45:04:706 : erasing sector 0203 @: 0x080cb000 done
+01:45:04:707 : sending a page erase request @: 0x080cc000
+01:45:04:724 : erasing sector 0204 @: 0x080cc000 done
+01:45:04:724 : sending a page erase request @: 0x080cd000
+01:45:04:747 : erasing sector 0205 @: 0x080cd000 done
+01:45:04:748 : sending a page erase request @: 0x080ce000
+01:45:04:773 : erasing sector 0206 @: 0x080ce000 done
+01:45:04:774 : sending a page erase request @: 0x080cf000
+01:45:04:794 : erasing sector 0207 @: 0x080cf000 done
+01:45:04:794 : sending a page erase request @: 0x080d0000
+01:45:04:823 : erasing sector 0208 @: 0x080d0000 done
+01:45:04:824 : sending a page erase request @: 0x080d1000
+01:45:04:840 : erasing sector 0209 @: 0x080d1000 done
+01:45:04:840 : sending a page erase request @: 0x080d2000
+01:45:04:873 : erasing sector 0210 @: 0x080d2000 done
+01:45:04:874 : sending a page erase request @: 0x080d3000
+01:45:04:889 : erasing sector 0211 @: 0x080d3000 done
+01:45:04:890 : sending a page erase request @: 0x080d4000
+01:45:04:923 : erasing sector 0212 @: 0x080d4000 done
+01:45:04:924 : sending a page erase request @: 0x080d5000
+01:45:04:944 : erasing sector 0213 @: 0x080d5000 done
+01:45:04:944 : sending a page erase request @: 0x080d6000
+01:45:04:956 : erasing sector 0214 @: 0x080d6000 done
+01:45:04:960 : sending a page erase request @: 0x080d7000
+01:45:04:969 : libusb get status error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:970 : an error occured while sending the sector erase command
+01:45:04:972 : erasing sector 0215 @: 0x080d7000 failed
+01:45:04:972 : libusb get status error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:972 : sending a clear status request
+01:45:04:972 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:972 : sending a clear status request
+01:45:04:973 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:973 : sending a clear status request
+01:45:04:973 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:973 : sending a clear status request
+01:45:04:973 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:973 : sending a clear status request
+01:45:04:975 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:975 : sending a clear status request
+01:45:04:975 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:975 : sending a clear status request
+01:45:04:975 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:975 : sending a clear status request
+01:45:04:975 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:975 : sending a clear status request
+01:45:04:975 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:975 : sending a clear status request
+01:45:04:975 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:975 : unable to switch the device to dfuIDLE/dfuDNLOAD_IDLE state
+01:45:04:975 : erasing sector 0216 @: 0x080d8000 failed
+01:45:04:975 : libusb get status error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:975 : sending a clear status request
+01:45:04:976 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:976 : sending a clear status request
+01:45:04:976 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:976 : sending a clear status request
+01:45:04:978 : libusb control transfer error [-9] : LIBUSB_ERROR_PIPE  
+01:45:04:978 : sending a clear status request
+01:45:04:979 : libusb control transfer error [-4] : LIBUSB_ERROR_NO_DEVICE  
+01:45:04:979 : device has been disconnected 
+01:45:04:979 : sending a clear status request
+01:45:04:979 : libusb control transfer error [-4] : LIBUSB_ERROR_NO_DEVICE  
+01:45:04:979 : device has been disconnected 
+01:45:04:979 : sending a clear status request
+01:45:04:979 : libusb control transfer error [-4] : LIBUSB_ERROR_NO_DEVICE  
+01:45:04:979 : device has been disconnected 
+01:45:04:979 : sending a clear status request
+01:45:04:979 : libusb control transfer error [-4] : LIBUSB_ERROR_NO_DEVICE  
+01:45:04:979 : device has been disconnected 
+01:45:04:979 : sending a clear status request
+01:45:04:979 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:979 : sending a clear status request
+01:45:04:979 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:979 : sending a clear status request
+01:45:04:979 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:979 : unable to switch the device to dfuIDLE/dfuDNLOAD_IDLE state
+01:45:04:979 : erasing sector 0217 @: 0x080d9000 failed
+01:45:04:979 : Download in Progress:
+01:45:04:979 :   Size          : 892000 Bytes
+01:45:04:980 :   Address       : 0x08000000 
+01:45:04:980 : libusb get status error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : sending a clear status request
+01:45:04:980 : libusb control transfer error [-1] : LIBUSB_ERROR_IO  
+01:45:04:980 : unable to switch the device to dfuIDLE/dfuDNLOAD_IDLE state
+01:45:04:980 : Error: failed to download  Sector[0]
+01:45:04:980 : Error: failed to download the File
+01:45:05:008 : Warning: Connection to device 0x495 is lost
+01:45:05:606 : Disconnected from device.

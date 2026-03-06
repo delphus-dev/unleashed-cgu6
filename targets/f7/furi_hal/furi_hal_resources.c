@@ -7,21 +7,29 @@
 
 #define TAG "FuriHalResources"
 
+// WeAct: Shift Register Button Pins
+const GpioPin gpio_button_IRQ = {.port = GPIOA, .pin = LL_GPIO_PIN_9};
+const GpioPin gpio_spi_miso_BTN = {.port = GPIOA, .pin = LL_GPIO_PIN_6};
+const GpioPin gpio_button_sr_latch = {.port = GPIOH, .pin = LL_GPIO_PIN_3};
+
 const GpioPin gpio_swdio = {.port = GPIOA, .pin = LL_GPIO_PIN_13};
 const GpioPin gpio_swclk = {.port = GPIOA, .pin = LL_GPIO_PIN_14};
 
-const GpioPin gpio_vibro = {.port = VIBRO_GPIO_Port, .pin = VIBRO_Pin};
+// const GpioPin gpio_vibro = {.port = VIBRO_GPIO_Port, .pin = VIBRO_Pin}; // WeAct: No vibro motor
+const GpioPin gpio_vibro = {.port = GPIOC, .pin = LL_GPIO_PIN_0}; // WeAct: Stub for compatibility
 const GpioPin gpio_ibutton = {.port = iBTN_GPIO_Port, .pin = iBTN_Pin};
 
 const GpioPin gpio_cc1101_g0 = {.port = CC1101_G0_GPIO_Port, .pin = CC1101_G0_Pin};
-const GpioPin gpio_rf_sw_0 = {.port = RF_SW_0_GPIO_Port, .pin = RF_SW_0_Pin};
+// const GpioPin gpio_rf_sw_0 = {.port = RF_SW_0_GPIO_Port, .pin = RF_SW_0_Pin}; // WeAct: No RF switch
+const GpioPin gpio_rf_sw_0 = {.port = GPIOC, .pin = LL_GPIO_PIN_0}; // WeAct: Stub for compatibility
 
 const GpioPin gpio_subghz_cs = {.port = CC1101_CS_GPIO_Port, .pin = CC1101_CS_Pin};
 const GpioPin gpio_display_cs = {.port = DISPLAY_CS_GPIO_Port, .pin = DISPLAY_CS_Pin};
 const GpioPin gpio_display_rst_n = {.port = DISPLAY_RST_GPIO_Port, .pin = DISPLAY_RST_Pin};
 const GpioPin gpio_display_di = {.port = DISPLAY_DI_GPIO_Port, .pin = DISPLAY_DI_Pin};
 const GpioPin gpio_sdcard_cs = {.port = SD_CS_GPIO_Port, .pin = SD_CS_Pin};
-const GpioPin gpio_sdcard_cd = {.port = SD_CD_GPIO_Port, .pin = SD_CD_Pin};
+// const GpioPin gpio_sdcard_cd = {.port = SD_CD_GPIO_Port, .pin = SD_CD_Pin}; // WeAct: No SD card detect
+const GpioPin gpio_sdcard_cd = {.port = GPIOC, .pin = LL_GPIO_PIN_0}; // WeAct: Stub for compatibility
 const GpioPin gpio_nfc_cs = {.port = NFC_CS_GPIO_Port, .pin = NFC_CS_Pin};
 
 const GpioPin gpio_button_up = {.port = GPIOB, .pin = LL_GPIO_PIN_10};
@@ -58,12 +66,13 @@ const GpioPin gpio_infrared_tx = {.port = IR_TX_GPIO_Port, .pin = IR_TX_Pin};
 const GpioPin gpio_usart_tx = {.port = USART1_TX_Port, .pin = USART1_TX_Pin};
 const GpioPin gpio_usart_rx = {.port = USART1_RX_Port, .pin = USART1_RX_Pin};
 
-const GpioPin gpio_i2c_power_sda = {.port = GPIOA, .pin = LL_GPIO_PIN_10};
-const GpioPin gpio_i2c_power_scl = {.port = GPIOA, .pin = LL_GPIO_PIN_9};
+// const GpioPin gpio_i2c_power_sda = {.port = GPIOA, .pin = LL_GPIO_PIN_10}; // WeAct: No I2C power control
+// const GpioPin gpio_i2c_power_scl = {.port = GPIOA, .pin = LL_GPIO_PIN_9}; // WeAct: No I2C power control
 
-const GpioPin gpio_speaker = {.port = GPIOB, .pin = LL_GPIO_PIN_8};
+// const GpioPin gpio_speaker = {.port = GPIOB, .pin = LL_GPIO_PIN_8}; // WeAct: No speaker
+const GpioPin gpio_speaker = {.port = GPIOC, .pin = LL_GPIO_PIN_0}; // WeAct: Stub for compatibility
 
-const GpioPin gpio_periph_power = {.port = GPIOA, .pin = LL_GPIO_PIN_3};
+// const GpioPin gpio_periph_power = {.port = GPIOA, .pin = LL_GPIO_PIN_3}; // WeAct: No peripheral power control
 
 const GpioPin gpio_usb_dm = {.port = GPIOA, .pin = LL_GPIO_PIN_11};
 const GpioPin gpio_usb_dp = {.port = GPIOA, .pin = LL_GPIO_PIN_12};
@@ -144,11 +153,11 @@ const GpioPinRecord gpio_pins[] = {
     // GND: 18
 
     /* Dangerous pins, may damage hardware */
-    {.pin = &gpio_speaker,
-     .name = "PB8",
-     .channel = FuriHalAdcChannelNone,
-     .number = 0,
-     .debug = true},
+    // {.pin = &gpio_speaker, // WeAct: No speaker
+    //  .name = "PB8",
+    //  .channel = FuriHalAdcChannelNone,
+    //  .number = 0,
+    //  .debug = true},
     {.pin = &gpio_infrared_tx,
      .name = "PB9",
      .channel = FuriHalAdcChannelNone,
@@ -195,17 +204,18 @@ void furi_hal_resources_init_early(void) {
     furi_hal_bus_enable(FuriHalBusGPIOE);
     furi_hal_bus_enable(FuriHalBusGPIOH);
 
-    furi_hal_resources_init_input_pins(GpioModeInput);
+    // furi_hal_resources_init_input_pins(GpioModeInput); // DISABLED for WeAct shift register
 
     // Explicit, surviving reset, pulls
     LL_PWR_EnablePUPDCfg();
-    LL_PWR_EnableGPIOPullDown(LL_PWR_GPIO_A, LL_PWR_GPIO_BIT_8); // gpio_vibro
-    LL_PWR_EnableGPIOPullDown(LL_PWR_GPIO_B, LL_PWR_GPIO_BIT_8); // gpio_speaker
+    LL_PWR_EnableGPIOPullUp(LL_PWR_GPIO_A, LL_PWR_GPIO_BIT_6); // gpio_spi_miso_BTN
+    // LL_PWR_EnableGPIOPullDown(LL_PWR_GPIO_A, LL_PWR_GPIO_BIT_8); // gpio_vibro - WeAct has no vibro
+    // LL_PWR_EnableGPIOPullDown(LL_PWR_GPIO_B, LL_PWR_GPIO_BIT_8); // gpio_speaker - WeAct has no speaker
     LL_PWR_EnableGPIOPullDown(LL_PWR_GPIO_B, LL_PWR_GPIO_BIT_9); // gpio_infrared_tx
 
     // SD Card stepdown control
-    furi_hal_gpio_write(&gpio_periph_power, 1);
-    furi_hal_gpio_init(&gpio_periph_power, GpioModeOutputOpenDrain, GpioPullNo, GpioSpeedLow);
+    // furi_hal_gpio_write(&gpio_periph_power, 1); // WeAct: No peripheral power control
+    // furi_hal_gpio_init(&gpio_periph_power, GpioModeOutputOpenDrain, GpioPullNo, GpioSpeedLow); // WeAct: No peripheral power control
 
     // Display pins
     furi_hal_gpio_write(&gpio_display_rst_n, 0);
@@ -246,17 +256,17 @@ void furi_hal_resources_deinit_early(void) {
 
 void furi_hal_resources_init(void) {
     // Button pins
-    furi_hal_resources_init_input_pins(GpioModeInterruptRiseFall);
+    // furi_hal_resources_init_input_pins(GpioModeInterruptRiseFall); // WeAct uses shift register
 
     // SD pins
-    furi_hal_gpio_init(&gpio_sdcard_cd, GpioModeInput, GpioPullNo, GpioSpeedLow);
-    furi_hal_gpio_write(&gpio_sdcard_cd, 0);
+    // furi_hal_gpio_init(&gpio_sdcard_cd, GpioModeInput, GpioPullNo, GpioSpeedLow); // WeAct: No SD card detect
+    // furi_hal_gpio_write(&gpio_sdcard_cd, 0); // WeAct: No SD card detect
 
     furi_hal_gpio_init(&gpio_ibutton, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
 
     furi_hal_gpio_init(&gpio_nfc_irq_rfid_pull, GpioModeInterruptRise, GpioPullNo, GpioSpeedLow);
 
-    furi_hal_gpio_init(&gpio_rf_sw_0, GpioModeOutputPushPull, GpioPullNo, GpioSpeedLow);
+    // furi_hal_gpio_init(&gpio_rf_sw_0, GpioModeOutputPushPull, GpioPullNo, GpioSpeedLow); // WeAct: No RF switch
 
     NVIC_SetPriority(EXTI0_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 5, 0));
     NVIC_EnableIRQ(EXTI0_IRQn);

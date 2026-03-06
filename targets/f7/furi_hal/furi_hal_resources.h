@@ -55,18 +55,26 @@ extern const size_t gpio_pins_count;
 extern const GpioPin gpio_swdio;
 extern const GpioPin gpio_swclk;
 
-extern const GpioPin gpio_vibro;
+// extern const GpioPin gpio_vibro; // WeAct: No vibro motor (stub defined for compatibility)
+extern const GpioPin gpio_vibro; // WeAct: Stub pointing to PC0
 extern const GpioPin gpio_ibutton;
 
 extern const GpioPin gpio_cc1101_g0;
-extern const GpioPin gpio_rf_sw_0;
+// extern const GpioPin gpio_rf_sw_0; // WeAct: No RF switch (stub defined for compatibility)
+extern const GpioPin gpio_rf_sw_0; // WeAct: Stub pointing to PC0
+
+// WeAct: Shift Register Button Pins
+extern const GpioPin gpio_button_IRQ;
+extern const GpioPin gpio_spi_miso_BTN;
+extern const GpioPin gpio_button_sr_latch;
 
 extern const GpioPin gpio_subghz_cs;
 extern const GpioPin gpio_display_cs;
 extern const GpioPin gpio_display_rst_n;
 extern const GpioPin gpio_display_di;
 extern const GpioPin gpio_sdcard_cs;
-extern const GpioPin gpio_sdcard_cd;
+// extern const GpioPin gpio_sdcard_cd; // WeAct: No SD card detect (stub defined for compatibility)
+extern const GpioPin gpio_sdcard_cd; // WeAct: Stub pointing to PC0
 extern const GpioPin gpio_nfc_cs;
 
 extern const GpioPin gpio_button_up;
@@ -102,12 +110,13 @@ extern const GpioPin gpio_infrared_tx;
 
 extern const GpioPin gpio_usart_tx;
 extern const GpioPin gpio_usart_rx;
-extern const GpioPin gpio_i2c_power_sda;
-extern const GpioPin gpio_i2c_power_scl;
+// extern const GpioPin gpio_i2c_power_sda; // WeAct: No I2C power control
+// extern const GpioPin gpio_i2c_power_scl; // WeAct: No I2C power control
 
-extern const GpioPin gpio_speaker;
+// extern const GpioPin gpio_speaker; // WeAct: No speaker (stub defined for compatibility)
+extern const GpioPin gpio_speaker; // WeAct: Stub pointing to PC0
 
-extern const GpioPin gpio_periph_power;
+// extern const GpioPin gpio_periph_power; // WeAct: No peripheral power control
 
 extern const GpioPin gpio_usb_dm;
 extern const GpioPin gpio_usb_dp;
@@ -214,6 +223,16 @@ extern const GpioPin gpio_usb_dp;
 
 #define NFC_IRQ_Pin       RFID_PULL_Pin
 #define NFC_IRQ_GPIO_Port RFID_PULL_GPIO_Port
+
+// WeAct STM32WB55CGU6 Pin Definitions
+
+// Shift Register Button Pins
+#define BUTTON_IRQ_GPIO_Port GPIOA
+#define BUTTON_IRQ_Pin       LL_GPIO_PIN_9
+#define SPI_MISO_BTN_GPIO_Port GPIOA
+#define SPI_MISO_BTN_Pin       LL_GPIO_PIN_6
+#define BUTTON_SR_LATCH_GPIO_Port GPIOH
+#define BUTTON_SR_LATCH_Pin       LL_GPIO_PIN_3
 
 void furi_hal_resources_init_early(void);
 

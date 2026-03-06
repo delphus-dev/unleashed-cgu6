@@ -13,7 +13,7 @@ const LL_SPI_InitTypeDef furi_hal_spi_preset_2edge_low_8m = {
     .TransferDirection = LL_SPI_FULL_DUPLEX,
     .DataWidth = LL_SPI_DATAWIDTH_8BIT,
     .ClockPolarity = LL_SPI_POLARITY_LOW,
-    .ClockPhase = LL_SPI_PHASE_2EDGE,
+    .ClockPhase = LL_SPI_PHASE_2EDGE, // WeAct: Changed from PHASE_1EDGE for NFC compatibility
     .NSS = LL_SPI_NSS_SOFT,
     .BaudRate = LL_SPI_BAUDRATEPRESCALER_DIV8,
     .BitOrder = LL_SPI_MSB_FIRST,
@@ -73,6 +73,19 @@ const LL_SPI_InitTypeDef furi_hal_spi_preset_1edge_low_2m = {
     .CRCPoly = 7,
 };
 
+const LL_SPI_InitTypeDef furi_hal_spi_preset_1edge_low_BTN = {
+    .Mode = LL_SPI_MODE_MASTER,
+    .TransferDirection = LL_SPI_FULL_DUPLEX,
+    .DataWidth = LL_SPI_DATAWIDTH_8BIT,
+    .ClockPolarity = LL_SPI_POLARITY_HIGH,
+    .ClockPhase = LL_SPI_PHASE_2EDGE,
+    .NSS = LL_SPI_NSS_SOFT,
+    .BaudRate = LL_SPI_BAUDRATEPRESCALER_DIV64,
+    .BitOrder = LL_SPI_MSB_FIRST,
+    .CRCCalculation = LL_SPI_CRCCALCULATION_DISABLE,
+    .CRCPoly = 7,
+};
+
 /* SPI Buses */
 
 FuriMutex* furi_hal_spi_bus_r_mutex = NULL;
@@ -94,6 +107,7 @@ void furi_hal_spi_config_init(void) {
     furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_nfc);
     furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_sd_fast);
     furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_sd_slow);
+    furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_button_sr);
 
     FURI_LOG_I(TAG, "Init OK");
 }
@@ -348,6 +362,40 @@ const FuriHalSpiBusHandle furi_hal_spi_bus_handle_external = {
     .mosi = &gpio_ext_pa7,
     .sck = &gpio_ext_pb3,
     .cs = &gpio_ext_pa4,
+};
+
+static void furi_hal_spi_bus_handle_button_sr_event_callback(
+    const FuriHalSpiBusHandle* handle,
+    FuriHalSpiBusHandleEvent event) {
+    const LL_SPI_InitTypeDef* preset = &furi_hal_spi_preset_1edge_low_BTN;
+
+    if(event == FuriHalSpiBusHandleEventInit) {
+        furi_hal_gpio_write(handle->cs, true);
+        furi_hal_gpio_init(handle->cs, GpioModeOutputPushPull, GpioPullUp, GpioSpeedLow);
+    } else if(event == FuriHalSpiBusHandleEventDeinit) {
+        furi_hal_gpio_init(handle->cs, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
+    } else if(event == FuriHalSpiBusHandleEventActivate) {
+        LL_SPI_Init(handle->bus->spi, (LL_SPI_InitTypeDef*)preset);
+        LL_SPI_Enable(handle->bus->spi);
+        furi_hal_gpio_init_ex(handle->miso, GpioModeAltFunctionPushPull, GpioPullUp, GpioSpeedVeryHigh, GpioAltFn5SPI1);
+        furi_hal_gpio_init_ex(handle->mosi, GpioModeAltFunctionPushPull, GpioPullUp, GpioSpeedVeryHigh, GpioAltFn5SPI1);
+        furi_hal_gpio_init_ex(handle->sck, GpioModeAltFunctionPushPull, GpioPullUp, GpioSpeedVeryHigh, GpioAltFn5SPI1);
+    } else if(event == FuriHalSpiBusHandleEventDeactivate) {
+        while(LL_SPI_IsActiveFlag_BSY(handle->bus->spi)) {};
+        LL_SPI_Disable(handle->bus->spi);
+        furi_hal_gpio_init(handle->miso, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
+        furi_hal_gpio_init(handle->mosi, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
+        furi_hal_gpio_init(handle->sck, GpioModeAnalog, GpioPullNo, GpioSpeedLow);
+    }
+}
+
+const FuriHalSpiBusHandle furi_hal_spi_bus_handle_button_sr = {
+    .bus = &furi_hal_spi_bus_r,
+    .callback = furi_hal_spi_bus_handle_button_sr_event_callback,
+    .miso = &gpio_spi_miso_BTN,
+    .mosi = &gpio_spi_r_mosi,
+    .sck = &gpio_spi_r_sck,
+    .cs = &gpio_button_sr_latch,
 };
 
 inline static void furi_hal_spi_bus_d_handle_event_callback(

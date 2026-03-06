@@ -77,18 +77,18 @@ void furi_hal_i2c_bus_handle_power_event(
     const FuriHalI2cBusHandle* handle,
     FuriHalI2cBusHandleEvent event) {
     if(event == FuriHalI2cBusHandleEventActivate) {
-        furi_hal_gpio_init_ex(
-            &gpio_i2c_power_sda,
-            GpioModeAltFunctionOpenDrain,
-            GpioPullNo,
-            GpioSpeedLow,
-            GpioAltFn4I2C1);
-        furi_hal_gpio_init_ex(
-            &gpio_i2c_power_scl,
-            GpioModeAltFunctionOpenDrain,
-            GpioPullNo,
-            GpioSpeedLow,
-            GpioAltFn4I2C1);
+        // furi_hal_gpio_init_ex( // WeAct: No I2C power control
+        //     &gpio_i2c_power_sda,
+        //     GpioModeAltFunctionOpenDrain,
+        //     GpioPullNo,
+        //     GpioSpeedLow,
+        //     GpioAltFn4I2C1);
+        // furi_hal_gpio_init_ex( // WeAct: No I2C power control
+        //     &gpio_i2c_power_scl,
+        //     GpioModeAltFunctionOpenDrain,
+        //     GpioPullNo,
+        //     GpioSpeedLow,
+        //     GpioAltFn4I2C1);
 
         LL_I2C_InitTypeDef I2C_InitStruct;
         I2C_InitStruct.PeripheralMode = LL_I2C_MODE_I2C;
@@ -111,12 +111,12 @@ void furi_hal_i2c_bus_handle_power_event(
         LL_I2C_EnableClockStretching(handle->bus->i2c);
     } else if(event == FuriHalI2cBusHandleEventDeactivate) {
         LL_I2C_Disable(handle->bus->i2c);
-        furi_hal_gpio_write(&gpio_i2c_power_sda, 1);
-        furi_hal_gpio_write(&gpio_i2c_power_scl, 1);
-        furi_hal_gpio_init_ex(
-            &gpio_i2c_power_sda, GpioModeAnalog, GpioPullNo, GpioSpeedLow, GpioAltFnUnused);
-        furi_hal_gpio_init_ex(
-            &gpio_i2c_power_scl, GpioModeAnalog, GpioPullNo, GpioSpeedLow, GpioAltFnUnused);
+        // furi_hal_gpio_write(&gpio_i2c_power_sda, 1); // WeAct: No I2C power control
+        // furi_hal_gpio_write(&gpio_i2c_power_scl, 1); // WeAct: No I2C power control
+        // furi_hal_gpio_init_ex( // WeAct: No I2C power control
+        //     &gpio_i2c_power_sda, GpioModeAnalog, GpioPullNo, GpioSpeedLow, GpioAltFnUnused);
+        // furi_hal_gpio_init_ex( // WeAct: No I2C power control
+        //     &gpio_i2c_power_scl, GpioModeAnalog, GpioPullNo, GpioSpeedLow, GpioAltFnUnused);
     }
 }
 

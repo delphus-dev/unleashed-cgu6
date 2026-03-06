@@ -310,9 +310,12 @@ static void
 }
 
 static void notification_apply_lcd_contrast(NotificationApp* app) {
-    Gui* gui = furi_record_open(RECORD_GUI);
-    u8x8_d_st756x_set_contrast(&gui->canvas->fb.u8x8, app->settings.contrast);
-    furi_record_close(RECORD_GUI);
+    /* REMOVED: HW Contrast call - may need different implementation */
+    UNUSED(app);
+    // Original code preserved below:
+    // Gui* gui = furi_record_open(RECORD_GUI);
+    // u8x8_d_st756x_set_contrast(&gui->canvas->fb.u8x8, app->settings.contrast);
+    // furi_record_close(RECORD_GUI);
 }
 
 static bool notification_is_any_led_layer_internal_and_not_empty(NotificationApp* app) {
@@ -420,28 +423,40 @@ static uint32_t notification_settings_display_off_delay_ticks(NotificationApp* a
 
 // generics
 static void notification_vibro_on(bool force) {
-    if(!furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode) || force) {
-        furi_hal_vibro_on(true);
-    }
+    /* REMOVED: HW Vibro call - WeAct board has no vibro motor */
+    UNUSED(force);
+    // Original code preserved below:
+    // if(!furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode) || force) {
+    //     furi_hal_vibro_on(true);
+    // }
 }
 
 static void notification_vibro_off(void) {
-    furi_hal_vibro_on(false);
+    /* REMOVED: HW Vibro call - WeAct board has no vibro motor */
+    // Original code preserved below:
+    // furi_hal_vibro_on(false);
 }
 
 static void notification_sound_on(float freq, float volume, bool force) {
-    if(!furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode) || force) {
-        if(furi_hal_speaker_is_mine() || furi_hal_speaker_acquire(30)) {
-            furi_hal_speaker_start(freq, volume);
-        }
-    }
+    /* REMOVED: HW Speaker calls - WeAct board has no speaker */
+    UNUSED(freq);
+    UNUSED(volume);
+    UNUSED(force);
+    // Original code preserved below:
+    // if(!furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode) || force) {
+    //     if(furi_hal_speaker_is_mine() || furi_hal_speaker_acquire(30)) {
+    //         furi_hal_speaker_start(freq, volume);
+    //     }
+    // }
 }
 
 static void notification_sound_off(void) {
-    if(furi_hal_speaker_is_mine()) {
-        furi_hal_speaker_stop();
-        furi_hal_speaker_release();
-    }
+    /* REMOVED: HW Speaker calls - WeAct board has no speaker */
+    // Original code preserved below:
+    // if(furi_hal_speaker_is_mine()) {
+    //     furi_hal_speaker_stop();
+    //     furi_hal_speaker_release();
+    // }
 }
 
 // display timer
