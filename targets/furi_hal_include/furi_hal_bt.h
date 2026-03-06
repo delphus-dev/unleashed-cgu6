@@ -16,7 +16,7 @@
 
 #define FURI_HAL_BT_STACK_VERSION_MAJOR (1)
 #define FURI_HAL_BT_STACK_VERSION_MINOR (12)
-#define FURI_HAL_BT_C2_START_TIMEOUT    (1000)
+#define FURI_HAL_BT_C2_START_TIMEOUT    (5000)  // WeAct: Increased timeout for slower startup
 
 #ifdef __cplusplus
 extern "C" {

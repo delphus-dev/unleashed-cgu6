@@ -11,15 +11,17 @@
 #include <furi_hal.h>
 
 #define INPUT_PRESS_TICKS 500
-#define INPUT_MAX_PRESS_DURATION_TICKS 5000
+#define INPUT_MAX_PRESS_DURATION_TICKS 5000 // 5 seconds
 #define INPUT_LONG_PRESS_COUNTS 5
 #define INPUT_THREAD_FLAG_ISR 0x00000001
 #define TAG "InputSrv"
 
+// Debounce configuration from your working version
 #define DEBOUNCE_CONSECUTIVE_READS 2
 #define DEBOUNCE_MAX_TRIES 10
 #define DEBOUNCE_READ_DELAY_MS 2
 
+// Helper macro for binary logging
 #define BYTE_TO_BIN_PATTERN "%c%c%c%c%c%c%c%c"
 #define BYTE_TO_BIN(byte) \
   ((byte) & 0x80 ? '1' : '0'), \
@@ -42,19 +44,22 @@ typedef struct {
 
 static InputKey decode_key_from_byte(uint8_t byte) {
     switch(byte) {
-    case 0b00010011: return InputKeyRight;
-    case 0b00100011: return InputKeyOk;
-    case 0b10000011: return InputKeyLeft;
-    case 0b01000011: return InputKeyUp;
-    case 0b00001011: return InputKeyDown;
-    case 0b00000111: return InputKeyBack;
+    case 0b00010011: return InputKeyRight;  
+    case 0b00100011: return InputKeyOk;        
+    case 0b10000011: return InputKeyLeft;         
+    case 0b01000011: return InputKeyUp;       
+    case 0b00001011: return InputKeyDown;     
+    case 0b00000111: return InputKeyBack;    
+    
     default: return InputKeyMAX;
     }
 }
 
+// Helper function to encapsulate the shift register read sequence
 static uint8_t read_shift_register(const FuriHalSpiBusHandle* spi_handle) {
     uint8_t value = 0;
 
+    // Latch and read shift register
     furi_hal_gpio_write(&gpio_button_sr_latch, false);
     furi_delay_us(5);
     furi_hal_gpio_write(&gpio_button_sr_latch, true);
@@ -62,10 +67,9 @@ static uint8_t read_shift_register(const FuriHalSpiBusHandle* spi_handle) {
     furi_hal_spi_acquire((FuriHalSpiBusHandle*)spi_handle);
     furi_hal_spi_bus_rx((FuriHalSpiBusHandle*)spi_handle, &value, 1, 100);
     furi_hal_spi_release((FuriHalSpiBusHandle*)spi_handle);
-    
-    FURI_LOG_D(TAG, "SR Read -> " BYTE_TO_BIN_PATTERN, BYTE_TO_BIN(~value));
-    
-    return ~value;
+        FURI_LOG_D(TAG, "SR Read -> " BYTE_TO_BIN_PATTERN, BYTE_TO_BIN(~value));
+        
+    return ~value; // Invert because buttons are active-low
 }
 
 void input_press_timer_callback(void* arg) {
@@ -117,14 +121,6 @@ const char* input_get_type_name(InputType type) {
 
 int32_t input_srv(void* p) {
     UNUSED(p);
-    
-    if(!furi_hal_is_normal_boot()) {
-        FURI_LOG_W(TAG, "Skipping start in special boot mode");
-        furi_thread_suspend(furi_thread_get_current_id());
-        return 0;
-    }
-    
-    FURI_LOG_I(TAG, "Input Service Starting...");
     const FuriThreadId thread_id = furi_thread_get_current_id();
     FuriPubSub* event_pubsub = furi_pubsub_alloc();
     furi_record_create(RECORD_INPUT_EVENTS, event_pubsub);
@@ -145,6 +141,7 @@ int32_t input_srv(void* p) {
         }
         pin_states[i].press_timer =
             furi_timer_alloc(input_press_timer_callback, FuriTimerTypePeriodic, &pin_states[i]);
+
         pin_states[i].event_pubsub = event_pubsub;
         pin_states[i].press_counter = 0;
         pin_states[i].state = false;
@@ -156,7 +153,10 @@ int32_t input_srv(void* p) {
 
     furi_delay_ms(50);
     uint8_t buttons_released_state = read_shift_register(spi_handle);
-    FURI_LOG_I(TAG, "Initial button state (released): " BYTE_TO_BIN_PATTERN, BYTE_TO_BIN(buttons_released_state));
+    FURI_LOG_I(
+        TAG,
+        "Initial button state (released): " BYTE_TO_BIN_PATTERN,
+        BYTE_TO_BIN(buttons_released_state));
 
     FURI_LOG_I(TAG, "Input Service Starting in Interrupt Mode");
     furi_hal_gpio_init(&gpio_button_IRQ, GpioModeInterruptRiseFall, GpioPullDown, GpioSpeedLow);
@@ -186,7 +186,6 @@ int32_t input_srv(void* p) {
                         consecutive = 0;
                     }
                 }
-                last_byte = current_byte;
                 tries++;
                 if(consecutive < DEBOUNCE_CONSECUTIVE_READS) {
                     furi_delay_ms(DEBOUNCE_READ_DELAY_MS);
@@ -194,7 +193,7 @@ int32_t input_srv(void* p) {
             } while(consecutive < DEBOUNCE_CONSECUTIVE_READS && tries < DEBOUNCE_MAX_TRIES);
 
             if(current_byte == last_debounced_state) {
-                continue;
+                continue; // Spurious interrupt, ignore.
             }
 
             FURI_LOG_D(TAG, "State change: " BYTE_TO_BIN_PATTERN, BYTE_TO_BIN(current_byte));
@@ -209,14 +208,17 @@ int32_t input_srv(void* p) {
 
                 if(press_duration_ticks >= INPUT_PRESS_TICKS) {
                     event.type = InputTypeLong;
-                    FURI_LOG_D(TAG, "Action -> Key: %s, Type: Long", input_get_key_name(event.key));
+                    FURI_LOG_D(
+                        TAG, "Action -> Key: %s, Type: Long", input_get_key_name(event.key));
                 } else {
-                    FURI_LOG_D(TAG, "Action -> Key: %s, Type: Short", input_get_key_name(event.key));
+                    FURI_LOG_D(
+                        TAG, "Action -> Key: %s, Type: Short", input_get_key_name(event.key));
                 }
                 furi_pubsub_publish(event_pubsub, &event);
 
                 event.type = InputTypeRelease;
-                FURI_LOG_D(TAG, "Action -> Key: %s, Type: Release", input_get_key_name(event.key));
+                FURI_LOG_D(
+                    TAG, "Action -> Key: %s, Type: Release", input_get_key_name(event.key));
                 furi_pubsub_publish(event_pubsub, &event);
             }
 
@@ -233,11 +235,14 @@ int32_t input_srv(void* p) {
             if(last_debounced_state != buttons_released_state) {
                 InputKey key_being_pressed = decode_key_from_byte(last_debounced_state);
                 if(key_being_pressed != InputKeyMAX) {
-                    uint32_t press_duration_ticks = furi_get_tick() - press_start_ticks[key_being_pressed];
+                    uint32_t press_duration_ticks =
+                        furi_get_tick() - press_start_ticks[key_being_pressed];
 
                     if(press_duration_ticks >= INPUT_MAX_PRESS_DURATION_TICKS) {
-                        FURI_LOG_W(TAG, "Max press duration for %s exceeded. Forcing release.",
-                                   input_get_key_name(key_being_pressed));
+                        FURI_LOG_W(
+                            TAG,
+                            "Max press duration for %s exceeded. Forcing release.",
+                            input_get_key_name(key_being_pressed));
 
                         InputEvent event = {
                             .key = key_being_pressed,
@@ -247,8 +252,10 @@ int32_t input_srv(void* p) {
 
                         event.type = InputTypeRelease;
                         furi_pubsub_publish(event_pubsub, &event);
-                        FURI_LOG_D(TAG, "Action -> Key: %s, Type: Release (Forced)",
-                                   input_get_key_name(event.key));
+                        FURI_LOG_D(
+                            TAG,
+                            "Action -> Key: %s, Type: Release (Forced)",
+                            input_get_key_name(event.key));
 
                         last_debounced_state = buttons_released_state;
                     }
@@ -257,6 +264,7 @@ int32_t input_srv(void* p) {
         }
     }
 
+    // Cleanup
     furi_hal_gpio_remove_int_callback(&gpio_button_IRQ);
     for(size_t i = 0; i < InputKeyMAX; i++) {
         if(pin_states[i].press_timer != NULL) {
