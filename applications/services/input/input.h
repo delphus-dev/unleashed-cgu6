@@ -14,6 +14,7 @@ extern "C" {
 #endif
 
 #define RECORD_INPUT_EVENTS            "input_events"
+#define RECORD_ASCII_EVENTS            "ascii_events"
 #define RECORD_INPUT_SETTINGS          "input_settings"
 #define INPUT_SEQUENCE_SOURCE_HARDWARE (0u)
 #define INPUT_SEQUENCE_SOURCE_SOFTWARE (1u)

@@ -6,18 +6,40 @@
 
 #define TAG "FuriHal"
 
+static bool normal_boot = false;
+
+bool furi_hal_is_normal_boot(void) {
+    return normal_boot;
+}
+
+void furi_hal_set_is_normal_boot(bool is_normal_boot) {
+    normal_boot = is_normal_boot;
+}
+
 void furi_hal_init_early(void) {
+    FURI_LOG_I(TAG, "1. cortex_init_early");
     furi_hal_cortex_init_early();
+    FURI_LOG_I(TAG, "2. clock_init_early");
     furi_hal_clock_init_early();
+    FURI_LOG_I(TAG, "3. bus_init_early");
     furi_hal_bus_init_early();
+    FURI_LOG_I(TAG, "4. dma_init_early");
     furi_hal_dma_init_early();
+    FURI_LOG_I(TAG, "5. resources_init_early");
     furi_hal_resources_init_early();
+    FURI_LOG_I(TAG, "6. os_init");
     furi_hal_os_init();
+    FURI_LOG_I(TAG, "7. spi_config_init_early");
     furi_hal_spi_config_init_early();
+    FURI_LOG_I(TAG, "8. i2c_init_early");
     furi_hal_i2c_init_early();
+    FURI_LOG_I(TAG, "9. light_init");
     furi_hal_light_init();
+    FURI_LOG_I(TAG, "10. rtc_init_early");
     furi_hal_rtc_init_early();
+    FURI_LOG_I(TAG, "11. version_init");
     furi_hal_version_init();
+    FURI_LOG_I(TAG, "init_early COMPLETE");
 }
 
 void furi_hal_deinit_early(void) {
@@ -40,6 +62,7 @@ void furi_hal_init(void) {
     furi_hal_interrupt_init();
     furi_hal_flash_init();
     furi_hal_resources_init();
+    furi_hal_region_init();
     furi_hal_spi_config_init();
     furi_hal_spi_dma_init();
     furi_hal_ibutton_init();

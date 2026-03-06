@@ -892,19 +892,16 @@ static FuriStatus sd_device_write(const uint32_t* buff, uint32_t sector, uint32_
 }
 
 void furi_hal_sd_presence_init(void) {
-    // low speed input with pullup
-    furi_hal_gpio_init(&gpio_sdcard_cd, GpioModeInput, GpioPullUp, GpioSpeedLow);
+    // WeAct: No SD card detect pin, stub for compatibility
 }
 
 static void furi_hal_sd_present_pin_set_low(void) {
-    // low speed input with pullup
-    furi_hal_gpio_init_simple(&gpio_sdcard_cd, GpioModeOutputOpenDrain);
-    furi_hal_gpio_write(&gpio_sdcard_cd, 0);
+    // WeAct: No SD card detect pin, stub for compatibility
 }
 
 bool furi_hal_sd_is_present(void) {
-    bool result = !furi_hal_gpio_read(&gpio_sdcard_cd);
-    return result;
+    // WeAct: No SD card detect pin, always return true
+    return true;
 }
 
 uint8_t furi_hal_sd_max_mount_retry_count(void) {

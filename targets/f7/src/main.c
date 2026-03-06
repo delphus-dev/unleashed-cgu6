@@ -27,6 +27,7 @@ int main(void) {
     // Flipper critical FURI HAL
     furi_hal_init_early();
 
+    furi_hal_set_is_normal_boot(false);
     FuriThread* main_thread = furi_thread_alloc_ex("InitSrv", 1024, init_task, NULL);
     furi_thread_set_priority(main_thread, FuriThreadPriorityInit);
 
@@ -46,6 +47,9 @@ int main(void) {
         furi_hal_rtc_set_boot_mode(FuriHalRtcBootModeNormal);
         furi_hal_power_reset();
     } else {
+        if(boot_mode != FuriHalRtcBootModePostUpdate && boot_mode != FuriHalRtcBootModePreUpdate) {
+            furi_hal_set_is_normal_boot(true);
+        }
         furi_thread_start(main_thread);
     }
 

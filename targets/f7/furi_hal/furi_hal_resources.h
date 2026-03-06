@@ -207,19 +207,19 @@ extern const GpioPin gpio_usb_dp;
 #define USART1_RX_Pin  LL_GPIO_PIN_7
 #define USART1_RX_Port GPIOB
 
-#define SPI_D_MISO_GPIO_Port GPIOC
-#define SPI_D_MISO_Pin       LL_GPIO_PIN_2
+#define SPI_D_MISO_GPIO_Port GPIOB
+#define SPI_D_MISO_Pin       LL_GPIO_PIN_4
 #define SPI_D_MOSI_GPIO_Port GPIOB
-#define SPI_D_MOSI_Pin       LL_GPIO_PIN_15
-#define SPI_D_SCK_GPIO_Port  GPIOD
-#define SPI_D_SCK_Pin        LL_GPIO_PIN_1
+#define SPI_D_MOSI_Pin       LL_GPIO_PIN_5
+#define SPI_D_SCK_GPIO_Port  GPIOB
+#define SPI_D_SCK_Pin        LL_GPIO_PIN_3
 
 #define SPI_R_MISO_GPIO_Port GPIOB
 #define SPI_R_MISO_Pin       LL_GPIO_PIN_4
 #define SPI_R_MOSI_GPIO_Port GPIOB
 #define SPI_R_MOSI_Pin       LL_GPIO_PIN_5
-#define SPI_R_SCK_GPIO_Port  GPIOA
-#define SPI_R_SCK_Pin        LL_GPIO_PIN_5
+#define SPI_R_SCK_GPIO_Port  GPIOB
+#define SPI_R_SCK_Pin        LL_GPIO_PIN_3
 
 #define NFC_IRQ_Pin       RFID_PULL_Pin
 #define NFC_IRQ_GPIO_Port RFID_PULL_GPIO_Port

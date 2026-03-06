@@ -180,14 +180,12 @@ static void desktop_tick_event_callback(void* context) {
     scene_manager_handle_tick_event(app->scene_manager);
 }
 
-static void desktop_input_event_callback(const void* value, void* context) {
+static void desktop_auto_lock_callback(const void* value, void* context) {
     furi_assert(value);
     furi_assert(context);
-    const InputEvent* event = value;
+    UNUSED(value);
     Desktop* desktop = context;
-    if(event->type == InputTypePress) {
-        desktop_start_auto_lock_timer(desktop);
-    }
+    desktop_start_auto_lock_timer(desktop);
 }
 
 static void desktop_auto_lock_timer_callback(void* context) {
@@ -209,7 +207,11 @@ static void desktop_auto_lock_arm(Desktop* desktop) {
     if(desktop->settings.auto_lock_delay_ms) {
         if(!desktop->input_events_subscription) {
             desktop->input_events_subscription = furi_pubsub_subscribe(
-                desktop->input_events_pubsub, desktop_input_event_callback, desktop);
+                desktop->input_events_pubsub, desktop_auto_lock_callback, desktop);
+        }
+        if(!desktop->ascii_events_subscription) {
+            desktop->ascii_events_subscription = furi_pubsub_subscribe(
+                desktop->ascii_events_pubsub, desktop_auto_lock_callback, desktop);
         }
         desktop_start_auto_lock_timer(desktop);
     }
@@ -220,6 +222,10 @@ static void desktop_auto_lock_inhibit(Desktop* desktop) {
     if(desktop->input_events_subscription) {
         furi_pubsub_unsubscribe(desktop->input_events_pubsub, desktop->input_events_subscription);
         desktop->input_events_subscription = NULL;
+    }
+    if(desktop->ascii_events_subscription) {
+        furi_pubsub_unsubscribe(desktop->ascii_events_pubsub, desktop->ascii_events_subscription);
+        desktop->ascii_events_subscription = NULL;
     }
 }
 
@@ -380,6 +386,7 @@ static Desktop* desktop_alloc(void) {
     desktop->storage = furi_record_open(RECORD_STORAGE);
     desktop->notification = furi_record_open(RECORD_NOTIFICATION);
     desktop->input_events_pubsub = furi_record_open(RECORD_INPUT_EVENTS);
+    desktop->ascii_events_pubsub = furi_record_open(RECORD_ASCII_EVENTS);
 
     desktop->auto_lock_timer =
         furi_timer_alloc(desktop_auto_lock_timer_callback, FuriTimerTypeOnce, desktop);
@@ -520,7 +527,7 @@ void desktop_api_set_settings(Desktop* instance, const DesktopSettings* settings
 int32_t desktop_srv(void* p) {
     UNUSED(p);
 
-    if(furi_hal_rtc_get_boot_mode() != FuriHalRtcBootModeNormal) {
+    if(!furi_hal_is_normal_boot()) {
         FURI_LOG_W(TAG, "Skipping start in special boot mode");
 
         furi_thread_suspend(furi_thread_get_current_id());
@@ -533,9 +540,12 @@ int32_t desktop_srv(void* p) {
 
     scene_manager_next_scene(desktop->scene_manager, DesktopSceneMain);
 
+    bool enable_cli_vcp = true;
     if(desktop_pin_code_is_set()) {
+        enable_cli_vcp = false; // Disable CLI VCP when PIN is set
         desktop_lock(desktop);
-    } else {
+    }
+    if(enable_cli_vcp) {
         CliVcp* cli_vcp = furi_record_open(RECORD_CLI_VCP);
         cli_vcp_enable(cli_vcp);
         furi_record_close(RECORD_CLI_VCP);

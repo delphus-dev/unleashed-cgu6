@@ -24,19 +24,16 @@ extern const LL_SPI_InitTypeDef furi_hal_spi_preset_1edge_low_2m;
 /** Preset for Button Shift Register (74HC165) */
 extern const LL_SPI_InitTypeDef furi_hal_spi_preset_1edge_low_BTN;
 
-/** Furi Hal Spi Bus R (Radio: CC1101, Nfc, External)*/
-extern FuriHalSpiBus furi_hal_spi_bus_r;
+/** Furi Hal Spi Bus (Single bus for all peripherals on SPI1) */
+extern FuriHalSpiBus furi_hal_spi_bus;
 
-/** Furi Hal Spi Bus D (Display, SdCard) */
-extern FuriHalSpiBus furi_hal_spi_bus_d;
-
-/** CC1101 on `furi_hal_spi_bus_r` */
+/** CC1101 on `furi_hal_spi_bus` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_subghz;
 
-/** ST25R3916 on `furi_hal_spi_bus_r` */
+/** ST25R3916 on `furi_hal_spi_bus` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_nfc;
 
-/** External on `furi_hal_spi_bus_r`
+/** External on `furi_hal_spi_bus`
  * Preset: `furi_hal_spi_preset_1edge_low_2m`
  * 
  * miso: pa6
@@ -50,16 +47,16 @@ extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_nfc;
  */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_external;
 
-/** ST7567(Display) on `furi_hal_spi_bus_d` */
+/** ST7567(Display) on `furi_hal_spi_bus` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_display;
 
-/** SdCard in fast mode on `furi_hal_spi_bus_d` */
+/** SdCard in fast mode on `furi_hal_spi_bus` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_sd_fast;
 
-/** SdCard in slow mode on `furi_hal_spi_bus_d` */
+/** SdCard in slow mode on `furi_hal_spi_bus` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_sd_slow;
 
-/** Button Shift Register on `furi_hal_spi_bus_r` */
+/** Button Shift Register on `furi_hal_spi_bus` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_button_sr;
 
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 entry,status,name,type,params
-Version,+,88.0,,
+Version,+,89.0,,
 Header,+,applications/drivers/subghz/cc1101_ext/cc1101_ext_interconnect.h,,
 Header,+,applications/services/applications.h,,
 Header,+,applications/services/bt/bt_service/bt.h,,
@@ -1561,6 +1561,7 @@ Function,+,furi_hal_interrupt_get_time_in_isr_total,uint32_t,
 Function,-,furi_hal_interrupt_init,void,
 Function,+,furi_hal_interrupt_set_isr,void,"FuriHalInterruptId, FuriHalInterruptISR, void*"
 Function,+,furi_hal_interrupt_set_isr_ex,void,"FuriHalInterruptId, FuriHalInterruptPriority, FuriHalInterruptISR, void*"
+Function,-,furi_hal_is_normal_boot,_Bool,
 Function,+,furi_hal_light_blink_set_color,void,Light
 Function,+,furi_hal_light_blink_start,void,"Light, uint8_t, uint16_t, uint16_t"
 Function,+,furi_hal_light_blink_stop,void,
@@ -1666,6 +1667,7 @@ Function,+,furi_hal_random_init,void,
 Function,+,furi_hal_region_get,const FuriHalRegion*,
 Function,+,furi_hal_region_get_band,const FuriHalRegionBand*,uint32_t
 Function,+,furi_hal_region_get_name,const char*,
+Function,+,furi_hal_region_init,void,
 Function,+,furi_hal_region_is_frequency_allowed,_Bool,uint32_t
 Function,+,furi_hal_region_is_provisioned,_Bool,
 Function,+,furi_hal_region_set,void,FuriHalRegion*
@@ -1770,6 +1772,7 @@ Function,+,furi_hal_serial_set_br,void,"FuriHalSerialHandle*, uint32_t"
 Function,+,furi_hal_serial_suspend,void,FuriHalSerialHandle*
 Function,+,furi_hal_serial_tx,void,"FuriHalSerialHandle*, const uint8_t*, size_t"
 Function,+,furi_hal_serial_tx_wait_complete,void,FuriHalSerialHandle*
+Function,-,furi_hal_set_is_normal_boot,void,_Bool
 Function,+,furi_hal_speaker_acquire,_Bool,uint32_t
 Function,-,furi_hal_speaker_deinit,void,
 Function,-,furi_hal_speaker_init,void,
@@ -5139,7 +5142,7 @@ Variable,+,furi_hal_i2c_bus_external,FuriHalI2cBus,
 Variable,+,furi_hal_i2c_bus_power,FuriHalI2cBus,
 Variable,+,furi_hal_i2c_handle_external,const FuriHalI2cBusHandle,
 Variable,+,furi_hal_i2c_handle_power,const FuriHalI2cBusHandle,
-Variable,+,furi_hal_spi_bus_d,FuriHalSpiBus,
+Variable,+,furi_hal_spi_bus,FuriHalSpiBus,
 Variable,+,furi_hal_spi_bus_handle_button_sr,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_display,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_external,const FuriHalSpiBusHandle,
@@ -5147,7 +5150,6 @@ Variable,+,furi_hal_spi_bus_handle_nfc,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_sd_fast,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_sd_slow,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_subghz,const FuriHalSpiBusHandle,
-Variable,+,furi_hal_spi_bus_r,FuriHalSpiBus,
 Variable,+,furi_hal_spi_preset_1edge_low_16m,const LL_SPI_InitTypeDef,
 Variable,+,furi_hal_spi_preset_1edge_low_2m,const LL_SPI_InitTypeDef,
 Variable,+,furi_hal_spi_preset_1edge_low_4m,const LL_SPI_InitTypeDef,

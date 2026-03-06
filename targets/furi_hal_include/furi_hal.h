@@ -46,6 +46,11 @@ struct STOP_EXTERNING_ME {};
 extern "C" {
 #endif
 
+/** True if booting normally with all subsystems */
+bool furi_hal_is_normal_boot(void);
+
+void furi_hal_set_is_normal_boot(bool is_normal_boot);
+
 /** Early FuriHal init
  * 
  * Init essential subsystems used in pre-DFU stage.

@@ -2,6 +2,7 @@
 #include <furi_hal_resources.h>
 #include <furi_hal_light.h>
 #include <lp5562.h>
+#include <lp5562_reg.h>
 #include <stdint.h>
 #include <notification/notification_app.h>
 
@@ -12,6 +13,17 @@
 
 void furi_hal_light_init(void) {
     furi_hal_i2c_acquire(&furi_hal_i2c_handle_power);
+
+    // Try to detect LP5562 presence before initializing
+    uint8_t test_val = 0;
+    bool lp5562_present = furi_hal_i2c_read_reg_8(
+        &furi_hal_i2c_handle_power, LP5562_ADDRESS, 0x00, &test_val, 100);
+    
+    if(!lp5562_present) {
+        FURI_LOG_W("FuriHalLight", "LP5562 not detected, skipping LED init");
+        furi_hal_i2c_release(&furi_hal_i2c_handle_power);
+        return;
+    }
 
     lp5562_reset(&furi_hal_i2c_handle_power);
 

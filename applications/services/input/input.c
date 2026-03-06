@@ -117,9 +117,19 @@ const char* input_get_type_name(InputType type) {
 
 int32_t input_srv(void* p) {
     UNUSED(p);
+    
+    if(!furi_hal_is_normal_boot()) {
+        FURI_LOG_W(TAG, "Skipping start in special boot mode");
+        furi_thread_suspend(furi_thread_get_current_id());
+        return 0;
+    }
+    
+    FURI_LOG_I(TAG, "Input Service Starting...");
     const FuriThreadId thread_id = furi_thread_get_current_id();
     FuriPubSub* event_pubsub = furi_pubsub_alloc();
     furi_record_create(RECORD_INPUT_EVENTS, event_pubsub);
+    FuriPubSub* ascii_pubsub = furi_pubsub_alloc();
+    furi_record_create(RECORD_ASCII_EVENTS, ascii_pubsub);
     InputSettings* settings = malloc(sizeof(InputSettings));
     input_settings_load(settings);
     furi_record_create(RECORD_INPUT_SETTINGS, settings);
@@ -255,6 +265,7 @@ int32_t input_srv(void* p) {
         }
     }
     furi_pubsub_free(event_pubsub);
+    furi_pubsub_free(ascii_pubsub);
     free(settings);
 
     return 0;

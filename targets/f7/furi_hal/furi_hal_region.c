@@ -15,6 +15,10 @@ const FuriHalRegion furi_hal_region_zero = {
 
 static const FuriHalRegion* furi_hal_region = NULL;
 
+void furi_hal_region_init(void) {
+    // Stub for WeAct board - no dynamic region support
+}
+
 const FuriHalRegion* furi_hal_region_get(void) {
     return &furi_hal_region_zero;
 }

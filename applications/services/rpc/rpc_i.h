@@ -50,6 +50,8 @@ void rpc_cli_command_start_session(PipeSide* pipe, FuriString* args, void* conte
 
 PB_CommandStatus rpc_system_storage_get_error(FS_Error fs_error);
 
+size_t rpc_get_sessions_count(Rpc* rpc);
+
 #ifdef __cplusplus
 }
 #endif
