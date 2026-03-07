@@ -242,24 +242,33 @@ static ViewPort* power_battery_view_port_alloc(Power* power) {
     return battery_view_port;
 }
 
+/* WeAct: HARDCODED FAKE DATA - Edit these to change the displayed status */
+#define FAKE_CHARGE_PCT     67
+#define FAKE_HEALTH_PCT     100
+#define FAKE_IS_CHARGING    false
+#define FAKE_IS_GAUGE_OK    true
+#define FAKE_VBUS_VOLTAGE   0.0f
+#define FAKE_BATTERY_VOLT   4.1f
+
 static bool power_update_info(Power* power) {
+    /* WeAct: All furi_hal_power_* calls removed to prevent HW polling on missing hardware */
     const PowerInfo info = {
-        .is_charging = furi_hal_power_is_charging(),
-        .gauge_is_ok = furi_hal_power_gauge_is_ok(),
-        .is_shutdown_requested = furi_hal_power_is_shutdown_requested(),
-        .is_otg_enabled = furi_hal_power_is_otg_enabled(),
-        .charge = furi_hal_power_get_pct(),
-        .health = furi_hal_power_get_bat_health_pct(),
-        .capacity_remaining = furi_hal_power_get_battery_remaining_capacity(),
-        .capacity_full = furi_hal_power_get_battery_full_capacity(),
-        .current_charger = furi_hal_power_get_battery_current(FuriHalPowerICCharger),
-        .current_gauge = furi_hal_power_get_battery_current(FuriHalPowerICFuelGauge),
-        .voltage_battery_charge_limit = furi_hal_power_get_battery_charge_voltage_limit(),
-        .voltage_charger = furi_hal_power_get_battery_voltage(FuriHalPowerICCharger),
-        .voltage_gauge = furi_hal_power_get_battery_voltage(FuriHalPowerICFuelGauge),
-        .voltage_vbus = furi_hal_power_get_usb_voltage(),
-        .temperature_charger = furi_hal_power_get_battery_temperature(FuriHalPowerICCharger),
-        .temperature_gauge = furi_hal_power_get_battery_temperature(FuriHalPowerICFuelGauge),
+        .is_charging = FAKE_IS_CHARGING,
+        .gauge_is_ok = FAKE_IS_GAUGE_OK,
+        .is_shutdown_requested = false,
+        .is_otg_enabled = false,
+        .charge = FAKE_CHARGE_PCT,
+        .health = FAKE_HEALTH_PCT,
+        .capacity_remaining = 1800,
+        .capacity_full = 2100,
+        .current_charger = 0,
+        .current_gauge = -150,
+        .voltage_battery_charge_limit = 4.2f,
+        .voltage_charger = 0.0f,
+        .voltage_gauge = FAKE_BATTERY_VOLT,
+        .voltage_vbus = FAKE_VBUS_VOLTAGE,
+        .temperature_charger = 25.0f,
+        .temperature_gauge = 25.0f,
     };
 
     const bool need_refresh = (power->info.charge != info.charge) ||
@@ -271,8 +280,9 @@ static bool power_update_info(Power* power) {
 static void power_check_charging_state(Power* power) {
     NotificationApp* notification = furi_record_open(RECORD_NOTIFICATION);
 
-    if(furi_hal_power_is_charging()) {
-        if((power->info.charge == 100) || (furi_hal_power_is_charging_done())) {
+    /* WeAct: HAL call replaced with power->info check */
+    if(power->info.is_charging) {
+        if((power->info.charge == 100)) {
             if(power->state != PowerStateCharged) {
                 notification_internal_message(notification, &sequence_charged);
                 power->state = PowerStateCharged;
