@@ -3,6 +3,15 @@ App(
     name="Basic debug apps bundle",
     apptype=FlipperAppType.METAPACKAGE,
     provides=[
-        # WeAct: All debug apps disabled - BLE stack at 0x080D7000, need to fit in 860KB
+        "blink_test",
+        "vibro_test",
+        "keypad_test",
+        "usb_test",
+        "usb_mouse",
+        "uart_echo",
+        "display_test",
+        "text_box_test",
+        "file_browser_test",
+        "speaker_debug",
     ],
 )
