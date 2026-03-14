@@ -1,2 +1,80 @@
 # Unleashed Firmware for WB55CGU6
-readme coming soon
+
+## How does this work?
+
+### Requied changes:
+`input.c`: 
+Rewrote the button polling logic. Since the board lacks sufficient GPIOs for direct connection, input reading is now implemented via an SPI Shift Register.
+
+`furi_hal_resources.c`: 
+Completely remapped the pin definitions to match the WeAct board topology, including definitions for SPI1, I2C, and system-level peripherals.
+
+`furi_hal_power.c` / `power.c`: 
+Adapted the codebase to function without the BQ25896 charge controller chip.
+Implemented "fake" battery data (corrected current consumption from 150A to 150mA) to prevent system alerts.
+
+`furi_hal_spi_config.c`: 
+Consolidated multiple peripherals onto a single SPI1 bus to accommodate the limited pin availability on the CGU6 module.
+
+### Optional changes:
+`desktop.c`: 
+Disabled the Secure Enclave check during startup. This allows the system to boot successfully without requiring specific hardware security keys.
+
+`power.c`: 
+Disabled the battery icon in the status bar to reflect the hardware limitations.
+
+---
+
+## Required modules
+
+| Component | Description | quantity |
+| --- | --- | --- |
+| **STM32WB55CGU6** | **Main MCU:** Dual-core processor with BLE support. | 1x |
+| **CC1101** | **Sub-GHz Module:** Based on CC1101 for radio communication. | 1x |
+| **ST7565R** *or* **ST7567** | **Screen:** 128x64 Monochrome LCD. | 1x |
+| **ST25R3916** | **NFC Chip:** High-performance NFC/RFID reader. | 1x |
+| **SN74HC165** | **Shift Register:** Manages button inputs to save GPIO pins. | 1x |
+| **MicroSD** | **MicroSD Slot:** Used for storing signal databases (NFC/Sub-GHz/IR) | 1x |
+| **IR LED** | **IR Send:** High-power infrared emitter. | 1x |
+| **IR Receiver** | **IR Receive:** Demodulator for capturing remote signals. | 1x |
+| **IN4148 Diode** | **Buttons:** Used in the button circuit | 6x |
+| **Resistors 10kΩ** | **Buttons:** Used in the button circuit | 9x |
+| **Resistor 4.7kΩ** | **iButton:** Used in the iButton | 1x |
+---
+
+## Pinout Documentation
+
+The following table maps the critical functions to the corresponding microcontroller pins as defined in the source code (Port/Pin format).
+
+| Function/Module | Source Variable | Port.Pin | Primary Use |
+| :--- | :--- | :--- | :--- |
+| **Buttons (PISO)** | `gpio_button_sr_latch` | `GPIOH.3` | Shift Register Latch/CS (Control) |
+| **Button IRQ** | `gpio_button_IRQ` | *(Pin not defined in header)* | Interrupt from PISO Shift Register |
+| **Display Chip Select (CS)** | `gpio_display_cs` | `GPIOA.3` | SPI Bus 1 (Display) CS |
+| **Display Data/Command (DI)** | `gpio_display_di` | `GPIOB.1` | Display Data/Command Control |
+| **Display Reset (RST)** | `gpio_display_rst_n` | `GPIOB.0` | Display Reset |
+| **Sub-GHz CC1101 CS** | `gpio_subghz_cs` | `GPIOA.15` | SPI Bus 1 (Sub-GHz) CS |
+| **Sub-GHz CC1101 G0** | `gpio_cc1101_g0` | `GPIOA.1` | CC1101 G0 Interrupt Line |
+| **NFC Chip Select (CS)** | `gpio_nfc_cs` | `GPIOE.4` | SPI Bus 1 (NFC) CS |
+| **NFC IRQ** | `gpio_nfc_irq_rfid_pull` | `GPIOA.2` | NFC Interrupt Line |
+| **SD Card Chip Select (CS)** | `gpio_sdcard_cs` | `GPIOA.10` | SPI Bus 2 (SD Card) CS |
+| **Infrared RX** | `gpio_infrared_rx` | `GPIOA.0` | Infrared Receiver |
+| **Infrared TX** | `gpio_infrared_tx` | `GPIOB.9` | Infrared Transmitter |
+| **iButton** | `gpio_ibutton` | `GPIOB.8` | 1-Wire iButton Interface |
+
+### SPI Pins
+
+| Function | Source Variable | Port.Pin | Notes |
+| :--- | :--- | :--- | :--- |
+| **SPI Clock (SCK)** | `gpio_spi_sck` | `GPIOB.3` | Shared with External Header Pin 4 |
+| **SPI Master Out, Slave In (MOSI)** | `gpio_spi_mosi` | `GPIOB.5` | Shared with External Header Pin 6 |
+| **SPI Master In, Slave Out (MISO)** | `gpio_spi_miso` | `GPIOB.4` | Shared with External Header Pin 5 |
+| **PISO Latch/CS** | `gpio_button_sr_latch` | `GPIOH.3` | Latches button states for reading |
+
+### External Header Pinout
+
+The external header provides access to the primary SPI bus and the main USART channel, in addition to several general-purpose I/O (GPIO) pins.
+
+![ExternalPinout](https://raw.githubusercontent.com/enexis1337/DIY-Flipper-PCB/refs/heads/main/images/externalHeader.png)
+
+**Note:** Pin numbers 4, 5, and 6 are directly connected to the main SPI bus and are shared with the internal peripherals (Display, Sub-GHz, NFC, and Input Shift Register). They are typically used for connecting external modules.
