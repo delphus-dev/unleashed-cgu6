@@ -17,6 +17,8 @@
 #define POWER_VBUS_LOW_THRESHOLD   (4.0f)
 #define POWER_HEALTH_LOW_THRESHOLD (70U)
 
+// WeAct: Battery viewport disabled - callback function commented out
+/*
 static void power_draw_battery_callback(Canvas* canvas, void* context) {
     furi_assert(context);
     Power* power = context;
@@ -234,13 +236,17 @@ static void power_draw_battery_callback(Canvas* canvas, void* context) {
         canvas_draw_box(canvas, 8, 3, 8, 2);
     }
 }
+*/
 
+// WeAct: Battery viewport disabled - function commented out
+/*
 static ViewPort* power_battery_view_port_alloc(Power* power) {
     ViewPort* battery_view_port = view_port_alloc();
     view_port_set_width(battery_view_port, icon_get_width(&I_Battery_26x8));
     view_port_draw_callback_set(battery_view_port, power_draw_battery_callback, power);
     return battery_view_port;
 }
+*/
 
 /* WeAct: HARDCODED FAKE DATA - Edit these to change the displayed status */
 #define FAKE_CHARGE_PCT     67
@@ -262,7 +268,7 @@ static bool power_update_info(Power* power) {
         .capacity_remaining = 1800,
         .capacity_full = 2100,
         .current_charger = 0,
-        .current_gauge = -150,
+        .current_gauge = -0.067f,
         .voltage_battery_charge_limit = 4.2f,
         .voltage_charger = 0.0f,
         .voltage_gauge = FAKE_BATTERY_VOLT,
@@ -366,7 +372,8 @@ void power_trigger_ui_update(Power* power) {
     desktop_settings_load(settings);
     power->displayBatteryPercentage = settings->displayBatteryPercentage;
     free(settings);
-    view_port_update(power->battery_view_port);
+    // WeAct: Battery viewport disabled
+    // view_port_update(power->battery_view_port);
 }
 
 static void power_handle_shutdown(Power* power) {
@@ -620,7 +627,8 @@ static void power_tick_callback(void* context) {
     power_charge_supress(power);
     // Update battery view port
     if(need_refresh) {
-        view_port_update(power->battery_view_port);
+        // WeAct: Battery viewport disabled
+        // view_port_update(power->battery_view_port);
     }
     // Check OTG status, disable in case of a fault
     if(furi_hal_power_check_otg_fault()) {
@@ -699,9 +707,10 @@ static Power* power_alloc(void) {
     power->view_power_unplug_usb = power_unplug_usb_alloc();
 
     view_holder_attach_to_gui(power->view_holder, gui);
-    // Battery view port
-    power->battery_view_port = power_battery_view_port_alloc(power);
-    gui_add_view_port(gui, power->battery_view_port, GuiLayerStatusBarRight);
+    // Battery view port - WeAct: Disabled
+    // power->battery_view_port = power_battery_view_port_alloc(power);
+    // gui_add_view_port(gui, power->battery_view_port, GuiLayerStatusBarRight);
+    power->battery_view_port = NULL;  // WeAct: Set to NULL to prevent crashes
     // Event loop
     power->event_loop = furi_event_loop_alloc();
     power->message_queue = furi_message_queue_alloc(4, sizeof(PowerMessage));
