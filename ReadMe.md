@@ -50,14 +50,14 @@ The following table maps the critical functions to the corresponding microcontro
 | :--- | :--- | :--- | :--- |
 | **Buttons (PISO)** | `gpio_button_sr_latch` | `GPIOH.3` | Shift Register Latch/CS (Control) |
 | **Button IRQ** | `gpio_button_IRQ` | *(Pin not defined in header)* | Interrupt from PISO Shift Register |
-| **Display Chip Select (CS)** | `gpio_display_cs` | `GPIOA.3` | SPI Bus 1 (Display) CS |
-| **Display Data/Command (DI)** | `gpio_display_di` | `GPIOB.1` | Display Data/Command Control |
-| **Display Reset (RST)** | `gpio_display_rst_n` | `GPIOB.0` | Display Reset |
+| **Display CS** | `gpio_display_cs` | `GPIOA.3` | SPI Bus 1 (Display) CS |
+| **Display DI** | `gpio_display_di` | `GPIOB.1` | Display Data/Command Control |
+| **Display RST** | `gpio_display_rst_n` | `GPIOB.0` | Display Reset |
 | **Sub-GHz CC1101 CS** | `gpio_subghz_cs` | `GPIOA.15` | SPI Bus 1 (Sub-GHz) CS |
 | **Sub-GHz CC1101 G0** | `gpio_cc1101_g0` | `GPIOA.1` | CC1101 G0 Interrupt Line |
-| **NFC Chip Select (CS)** | `gpio_nfc_cs` | `GPIOE.4` | SPI Bus 1 (NFC) CS |
+| **NFC CS** | `gpio_nfc_cs` | `GPIOE.4` | SPI Bus 1 (NFC) CS |
 | **NFC IRQ** | `gpio_nfc_irq_rfid_pull` | `GPIOA.2` | NFC Interrupt Line |
-| **SD Card Chip Select (CS)** | `gpio_sdcard_cs` | `GPIOA.10` | SPI Bus 2 (SD Card) CS |
+| **SD Card CS** | `gpio_sdcard_cs` | `GPIOA.10` | SPI Bus 2 (SD Card) CS |
 | **Infrared RX** | `gpio_infrared_rx` | `GPIOA.0` | Infrared Receiver |
 | **Infrared TX** | `gpio_infrared_tx` | `GPIOB.9` | Infrared Transmitter |
 | **iButton** | `gpio_ibutton` | `GPIOB.8` | 1-Wire iButton Interface |
