@@ -310,12 +310,9 @@ static void
 }
 
 static void notification_apply_lcd_contrast(NotificationApp* app) {
-    /* REMOVED: HW Contrast call - may need different implementation */
-    UNUSED(app);
-    // Original code preserved below:
-    // Gui* gui = furi_record_open(RECORD_GUI);
-    // u8x8_d_st756x_set_contrast(&gui->canvas->fb.u8x8, app->settings.contrast);
-    // furi_record_close(RECORD_GUI);
+    Gui* gui = furi_record_open(RECORD_GUI);
+    u8x8_d_st756x_set_contrast(&gui->canvas->fb.u8x8, app->settings.contrast);
+    furi_record_close(RECORD_GUI);
 }
 
 static bool notification_is_any_led_layer_internal_and_not_empty(NotificationApp* app) {

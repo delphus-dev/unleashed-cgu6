@@ -2230,8 +2230,6 @@ Function,+,infrared_worker_tx_stop,void,InfraredWorker*
 Function,-,initstate,char*,"unsigned, char*, size_t"
 Function,+,input_get_key_name,const char*,InputKey
 Function,+,input_get_type_name,const char*,InputType
-Function,+,input_settings_load,void,InputSettings*
-Function,+,input_settings_save,void,const InputSettings*
 Function,-,iprintf,int,"const char*, ..."
 Function,-,isalnum,int,int
 Function,-,isalnum_l,int,"int, locale_t"
@@ -5146,6 +5144,7 @@ Variable,+,furi_hal_spi_bus,FuriHalSpiBus,
 Variable,+,furi_hal_spi_bus_handle_button_sr,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_display,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_external,const FuriHalSpiBusHandle,
+Variable,+,furi_hal_spi_bus_handle_external_extra,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_nfc,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_sd_fast,const FuriHalSpiBusHandle,
 Variable,+,furi_hal_spi_bus_handle_sd_slow,const FuriHalSpiBusHandle,

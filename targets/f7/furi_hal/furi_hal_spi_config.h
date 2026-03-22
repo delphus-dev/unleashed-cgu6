@@ -59,6 +59,9 @@ extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_sd_slow;
 /** Button Shift Register on `furi_hal_spi_bus` */
 extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_button_sr;
 
+/** Extra external on `furi_hal_spi_bus` */
+extern const FuriHalSpiBusHandle furi_hal_spi_bus_handle_external_extra;
+
 #ifdef __cplusplus
 }
 #endif

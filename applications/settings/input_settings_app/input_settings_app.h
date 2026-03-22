@@ -7,6 +7,7 @@
 #include <gui/view_dispatcher.h>
 #include <gui/modules/variable_item_list.h>
 #include <input/input.h>
+#include <input/input_settings.h>
 #include <lib/toolbox/value_index.h>
 #include <furi_hal_vibro.h>
 #include <storage/storage.h>

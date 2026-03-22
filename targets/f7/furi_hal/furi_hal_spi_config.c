@@ -153,7 +153,7 @@ void furi_hal_spi_config_init(void) {
     furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_sd_slow);
     furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_button_sr);
     furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_external);
-    // furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_external_extra);
+    furi_hal_spi_bus_handle_init(&furi_hal_spi_bus_handle_external_extra);
 
     //   FURI_LOG_I(TAG, "Init OK");
 }

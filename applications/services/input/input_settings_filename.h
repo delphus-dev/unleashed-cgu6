@@ -1,3 +1,3 @@
 #pragma once
 
-#define INPUT_SETTINGS_FILE_NAME ".input.settings"
+#define INPUT_SETTINGS_PATH INT_PATH(".input.settings")

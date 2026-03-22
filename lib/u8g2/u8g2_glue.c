@@ -2,8 +2,8 @@
 
 #include <furi_hal.h>
 
-#define CONTRAST_ERC 32
-#define CONTRAST_MGG 28
+#define CONTRAST_ERC 15
+#define CONTRAST_MGG 15
 
 uint8_t u8g2_gpio_and_delay_stm32(u8x8_t* u8x8, uint8_t msg, uint8_t arg_int, void* arg_ptr) {
     UNUSED(u8x8);
@@ -211,9 +211,7 @@ void u8x8_d_st756x_init(u8x8_t* u8x8, uint8_t contrast, uint8_t regulation_ratio
 }
 
 void u8x8_d_st756x_set_contrast(u8x8_t* u8x8, int8_t contrast_offset) {
-    uint8_t contrast = (furi_hal_version_get_hw_display() == FuriHalVersionDisplayMgg) ?
-                           CONTRAST_MGG :
-                           CONTRAST_ERC;
+    uint8_t contrast = CONTRAST_MGG; // ST7567 always uses MGG params
     contrast += contrast_offset;
     contrast = contrast & 0b00111111;
 
@@ -233,24 +231,10 @@ uint8_t u8x8_d_st756x_flipper(u8x8_t* u8x8, uint8_t msg, uint8_t arg_int, void* 
             break;
         case U8X8_MSG_DISPLAY_INIT:
             u8x8_d_helper_display_init(u8x8);
-            FuriHalVersionDisplay display = furi_hal_version_get_hw_display();
-            if(display == FuriHalVersionDisplayMgg) {
-                /* MGG v0+(ST7567)
-                 * EV = 32
-                 * RR = V0 / ((1 - (63 - EV) / 162) * 2.1)
-                 * RR = 10 / ((1 - (63 - 32) / 162) * 2.1) ~= 5.88 is 6 (0b110)
-                 * Bias = 1/9 (false)
-                 */
-                u8x8_d_st756x_init(u8x8, CONTRAST_MGG, 0b110, false);
-            } else {
-                /* ERC v1(ST7565) and v2(ST7567)
-                 * EV = 33
-                 * RR = V0 / ((1 - (63 - EV) / 162) * 2.1)
-                 * RR = 9.3 / ((1 - (63 - 32) / 162) * 2.1) ~= 5.47 is 5.5 (0b101)
-                 * Bias = 1/9 (false)
-                 */
-                u8x8_d_st756x_init(u8x8, CONTRAST_ERC, 0b101, false);
-            }
+            /* ST7567 (WeAct board) — always use MGG params
+             * EV = 12, RR = 0b110, Bias = 1/9
+             */
+            u8x8_d_st756x_init(u8x8, CONTRAST_MGG, 0b110, false);
             break;
         case U8X8_MSG_DISPLAY_SET_FLIP_MODE:
             if(arg_int == 0) {
