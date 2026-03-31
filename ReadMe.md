@@ -61,6 +61,7 @@ The following table maps the critical functions to the corresponding microcontro
 | **Infrared RX** | `gpio_infrared_rx` | `GPIOA.0` | Infrared Receiver |
 | **Infrared TX** | `gpio_infrared_tx` | `GPIOB.9` | Infrared Transmitter |
 | **iButton** | `gpio_ibutton` | `GPIOB.8` | 1-Wire iButton Interface |
+| **Buzzer** | `gpio_speaker` | `GPIOA.5` | Passive Buzzer Module |
 
 ### SPI Pins
 
