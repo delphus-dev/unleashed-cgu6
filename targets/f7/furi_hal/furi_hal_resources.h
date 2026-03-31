@@ -199,8 +199,8 @@ extern const GpioPin gpio_button_sr_latch;
 #define SD_CS_GPIO_Port GPIOA
 #define SD_CS_Pin       LL_GPIO_PIN_10
 
-#define SPEAKER_GPIO_Port GPIOC
-#define SPEAKER_Pin       LL_GPIO_PIN_0
+#define SPEAKER_GPIO_Port GPIOA
+#define SPEAKER_Pin       LL_GPIO_PIN_5
 
 #define VIBRO_GPIO_Port GPIOC
 #define VIBRO_Pin       LL_GPIO_PIN_0
