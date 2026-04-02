@@ -9,7 +9,8 @@
 
 #define TAG "FuriHalSpeaker"
 
-#define FURI_HAL_SPEAKER_TIMER      TIM16
+// PA5 -> TIM2_CH1 (AF1) on STM32WB55
+#define FURI_HAL_SPEAKER_TIMER      TIM2
 #define FURI_HAL_SPEAKER_CHANNEL    LL_TIM_CHANNEL_CH1
 #define FURI_HAL_SPEAKER_PRESCALER  500
 #define FURI_HAL_SPEAKER_MAX_VOLUME 60
@@ -35,9 +36,9 @@ bool furi_hal_speaker_acquire(uint32_t timeout) {
 
     if(furi_mutex_acquire(furi_hal_speaker_mutex, timeout) == FuriStatusOk) {
         furi_hal_power_insomnia_enter();
-        furi_hal_bus_enable(FuriHalBusTIM16);
+        furi_hal_bus_enable(FuriHalBusTIM2);
         furi_hal_gpio_init_ex(
-            &gpio_speaker, GpioModeAltFunctionPushPull, GpioPullNo, GpioSpeedLow, GpioAltFn14TIM16);
+            &gpio_speaker, GpioModeAltFunctionPushPull, GpioPullNo, GpioSpeedLow, GpioAltFn1TIM2);
         return true;
     } else {
         return false;
@@ -51,7 +52,7 @@ void furi_hal_speaker_release(void) {
     furi_hal_speaker_stop();
     furi_hal_gpio_init(&gpio_speaker, GpioModeAnalog, GpioPullDown, GpioSpeedLow);
 
-    furi_hal_bus_disable(FuriHalBusTIM16);
+    furi_hal_bus_disable(FuriHalBusTIM2);
     furi_hal_power_insomnia_exit();
 
     furi_check(furi_mutex_release(furi_hal_speaker_mutex) == FuriStatusOk);
@@ -63,13 +64,11 @@ bool furi_hal_speaker_is_mine(void) {
 }
 
 static inline uint32_t furi_hal_speaker_calculate_autoreload(float frequency) {
+    // TIM2 is 32-bit, no UINT16_MAX limit needed
     uint32_t autoreload = (SystemCoreClock / FURI_HAL_SPEAKER_PRESCALER / frequency) - 1;
     if(autoreload < 2) {
         autoreload = 2;
-    } else if(autoreload > UINT16_MAX) {
-        autoreload = UINT16_MAX;
     }
-
     return autoreload;
 }
 
@@ -114,7 +113,8 @@ void furi_hal_speaker_start(float frequency, float volume) {
     TIM_OC_InitStruct.CompareValue = furi_hal_speaker_calculate_compare(volume);
     LL_TIM_OC_Init(FURI_HAL_SPEAKER_TIMER, FURI_HAL_SPEAKER_CHANNEL, &TIM_OC_InitStruct);
 
-    LL_TIM_EnableAllOutputs(FURI_HAL_SPEAKER_TIMER);
+    // TIM2 is general-purpose, use CC channel enable (no EnableAllOutputs needed)
+    LL_TIM_CC_EnableChannel(FURI_HAL_SPEAKER_TIMER, FURI_HAL_SPEAKER_CHANNEL);
     LL_TIM_EnableCounter(FURI_HAL_SPEAKER_TIMER);
 }
 
@@ -134,6 +134,6 @@ void furi_hal_speaker_set_volume(float volume) {
 
 void furi_hal_speaker_stop(void) {
     furi_check(furi_hal_speaker_is_mine());
-    LL_TIM_DisableAllOutputs(FURI_HAL_SPEAKER_TIMER);
+    LL_TIM_CC_DisableChannel(FURI_HAL_SPEAKER_TIMER, FURI_HAL_SPEAKER_CHANNEL);
     LL_TIM_DisableCounter(FURI_HAL_SPEAKER_TIMER);
 }
