@@ -35,9 +35,9 @@ typedef struct {
 
 typedef struct {
     // 4 bits per data bit on transmit
-    uint8_t fifo_buf[FURI_HAL_NFC_ISO15693_POLLER_MAX_BUFFER_SIZE * FURI_HAL_NFC_ISO15693_BIT_LEN];
+    uint8_t fifo_buf[FURI_HAL_NFC_ISO15693_POLLER_MAX_BUFFER_SIZE * 4];
     size_t fifo_buf_bits;
-    uint8_t frame_buf[FURI_HAL_NFC_ISO15693_POLLER_MAX_BUFFER_SIZE * FURI_HAL_NFC_ISO15693_BIT_LEN];
+    uint8_t frame_buf[FURI_HAL_NFC_ISO15693_POLLER_MAX_BUFFER_SIZE * 2];
     size_t frame_buf_bits;
 } FuriHalNfcIso15693Poller;
 
@@ -410,20 +410,20 @@ FuriHalNfcError furi_hal_nfc_iso15693_listener_tx_sof(void) {
 }
 
 FuriHalNfcError furi_hal_nfc_iso15693_detect_mode(void) {
-    iso15693_parser_detect_mode(furi_hal_nfc_iso15693_listener->parser);
-
+    if(furi_hal_nfc_iso15693_listener)
+        iso15693_parser_detect_mode(furi_hal_nfc_iso15693_listener->parser);
     return FuriHalNfcErrorNone;
 }
 
 FuriHalNfcError furi_hal_nfc_iso15693_force_1outof4(void) {
-    iso15693_parser_force_1outof4(furi_hal_nfc_iso15693_listener->parser);
-
+    if(furi_hal_nfc_iso15693_listener)
+        iso15693_parser_force_1outof4(furi_hal_nfc_iso15693_listener->parser);
     return FuriHalNfcErrorNone;
 }
 
 FuriHalNfcError furi_hal_nfc_iso15693_force_1outof256(void) {
-    iso15693_parser_force_1outof256(furi_hal_nfc_iso15693_listener->parser);
-
+    if(furi_hal_nfc_iso15693_listener)
+        iso15693_parser_force_1outof256(furi_hal_nfc_iso15693_listener->parser);
     return FuriHalNfcErrorNone;
 }
 

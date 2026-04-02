@@ -38,20 +38,28 @@ void lfrfid_scene_extra_actions_on_enter(void* context) {
         lfrfid_scene_extra_actions_submenu_callback,
         app);
 
-    if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
-        submenu_add_item(
-            submenu,
-            "Read RAW RFID data",
-            SubmenuIndexRAW,
-            lfrfid_scene_extra_actions_submenu_callback,
-            app);
-        submenu_add_item(
-            submenu,
-            "Emulate RAW RFID data",
-            SubmenuIndexRAWEmulate,
-            lfrfid_scene_extra_actions_submenu_callback,
-            app);
-    }
+    submenu_add_lockable_item(
+        submenu,
+        "Read RAW RFID data",
+        SubmenuIndexRAW,
+        lfrfid_scene_extra_actions_submenu_callback,
+        app,
+        !furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug),
+        "Enable\n"
+        "Settings >\n"
+        "System >\n"
+        "Debug");
+    submenu_add_lockable_item(
+        submenu,
+        "Emulate RAW RFID data",
+        SubmenuIndexRAWEmulate,
+        lfrfid_scene_extra_actions_submenu_callback,
+        app,
+        !furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug),
+        "Enable\n"
+        "Settings >\n"
+        "System >\n"
+        "Debug");
 
     submenu_set_selected_item(
         submenu, scene_manager_get_scene_state(app->scene_manager, LfRfidSceneExtraActions));
