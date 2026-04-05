@@ -24,7 +24,7 @@ def main():
 
     subject = issuer = Name([
         NameAttribute(NameOID.COMMON_NAME, u"Flipper Zero U2F"),
-        NameAttribute(NameOID.ORGANIZATION_NAME, u"WeAct"),
+        NameAttribute(NameOID.ORGANIZATION_NAME, u"Flipper"),
         NameAttribute(NameOID.COUNTRY_NAME, u"US"),
     ])
 
