@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-Generate U2F certificate and key files for Flipper Zero (WeAct board, no factory keys).
-Output: cert.der and cert_key.u2f in the tools/ folder.
-Copy both files to /ext/u2f/assets/ on SD card.
-"""
-
 import os
 import datetime
 from cryptography.hazmat.primitives.asymmetric import ec
