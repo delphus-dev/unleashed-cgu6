@@ -8,7 +8,6 @@ The project aims to develop, improve, and enable the choice of different firmwar
 - [x] **Screen:** Contrast adjustment on the screen has been restored.
 - [x] **Buzzer:** Added a working Buzzer installed on GPIO A5.
 - [x] NFC and RFID operating functions(not tested)
-- [ ] Working screens SH1106 and SSD1306 on the SPI bus
 - [ ] Improved stability and optimization on non-standard firmware environments(Fixing occasional freezes and sudden firmware crashes caused by furi_check failed)
 
 ---
