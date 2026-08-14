@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> The firmware is no longer being developed.
+
 # Unleashed Firmware for STM32WB55CGU6
 
 The project aims to develop, improve, and enable the choice of different firmware versions within the FcFZ project. Detailed information on the pinouts, goals, and achievements of the firmware are described below.
